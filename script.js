@@ -37,13 +37,41 @@ function userRequestedCard(){
                 }    
             }
         }
+    } 
+    if (sumForUser > 21 && userHand.value != "A"){
+        endRound()
+    }
+    if (sumForUser === 21){
+    { endRound()
+            
+        }
     }
     console.log(userHand)
     console.log(sumForUser)
 }
 
+function endRound() {
+    if (sumForUser < sumForCpu && sumForCpu <= 21){
+        console.log('Damn son the pc just roasted you')
+    }
+    if (sumForUser > sumForCpu && sumForUser > 21) {
+        console.log('damn you just got busted')
+    }
+    if (sumForUser > sumForCpu && sumForUser <= 21){
+        console.log('Congrats on winning through all the trials and turbulations')
+    }
+    else if (sumForUser < sumForCpu && sumForCpu > 21){
+        console.log('Congats you won because the cpu busted')
+    }
+    
+    else if (sumForUser === sumForCpu) {
+        console.log('Congats on the tie')
+        
+    }
+}
+
 function cpuTurn() {
-    console.log('Player Has Ended Their Turn')
+    console.log(`The current value of the cpus hand is: ${sumForCpu}`)
     if (sumForCpu > 21){
         for (var c = 0; c < cpuHand.length; c++){
             console.log(`Lets see if this is an "A" ${cpuHand[c].value}`)
@@ -55,11 +83,25 @@ function cpuTurn() {
                 }    
             }
         }
+    }
+    if ( sumForCpu > 17) {
+        endRound()
+    }
+    else if ( sumForCpu > 21 && cpuHand[c].value != "A"){
+        endRound()
+    }
+    else {
+        randomNumber = Math.floor(Math.random()* deck.length)
+        sumForCpu += deck[randomNumber].weight
+        cpuHand.push(deck[randomNumber])
         console.log(cpuHand)
-        console.log(sumForCpu)
+        cpuTurn()
+    }
+    
+    console.log(cpuHand)
+    console.log(sumForCpu)
     }
 
-}
 function initialHandValues (uH,cH){ ///Calculates the initial values for hands and then checks if either player or cpu has 21
     for (i = 0; i < 2; i++){
 userValuesArray.push(uH[i].weight)
@@ -74,9 +116,11 @@ console.log(sumForUser)
 console.log(sumForCpu)
 if (sumForUser === 21){
     console.log('Congrats You got 21')
+    endRound()
 }
 if (sumForCpu === 21) {
     console.log('Unfortunately the cpu won')
+    endRound()
 }
 
 
