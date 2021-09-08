@@ -46,8 +46,6 @@ function userRequestedCard(){
             
         }
     }
-    console.log(userHand)
-    console.log(sumForUser)
 }
 
 function endRound() {
@@ -68,6 +66,12 @@ function endRound() {
         console.log('Congats on the tie')
         
     }
+    sumForUser = 0
+    sumForCpu = 0
+    userHand = []
+    cpuHand = []
+    userValuesArray = []
+    cpuValuesArray = []
 }
 
 function cpuTurn() {
@@ -84,7 +88,7 @@ function cpuTurn() {
             }
         }
     }
-    if ( sumForCpu > 17) {
+    if ( sumForCpu >= 17) {
         endRound()
     }
     else if ( sumForCpu > 21 && cpuHand[c].value != "A"){
