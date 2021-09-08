@@ -35,20 +35,20 @@ betForNextHand.innerText = wagerForNextHand
 //Event Listners
 var increaseBet = document.getElementById('increaseBtn')
 var decreaseBet = document.getElementById('decreaseBtn')
-increaseBet.addEventListener('click',betSettler)
-decreaseBet.addEventListener('click', betSettler)
+// increaseBet.addEventListener('click',betSettler)
+// decreaseBet.addEventListener('click', betSettler)
 // wagerForNextHand +=25, availableChips -= 25
 // wagerForNextHand-=25, availableChips += 25
-function betSettler () {
-    if(increaseBet === true){
-        console.log('It worked')
-    }
-    console.log(increaseBet.click)
-    data.removeItem('userChipValue', userChipValue)
-    data.setItem('userChipValue', userChipValue)
-    console.log(availableChips)
-    console.log(wagerForNextHand)
-}
+// function betSettler () {
+//     if(increaseBet === true){
+//         console.log('It worked')
+//     }
+//     console.log(increaseBet.click)
+//     data.removeItem('userChipValue', userChipValue)
+//     data.setItem('userChipValue', userChipValue)
+//     console.log(availableChips)
+//     console.log(wagerForNextHand)
+// }
 
 
 function startGame (){
@@ -72,6 +72,7 @@ function userRequestedCard(){
                 }    
             }
         }
+        
     } 
     if (sumForUser > 21 && userHand.value != "A"){
         endRound()
@@ -85,14 +86,12 @@ function userRequestedCard(){
 
 function endRound() {
     if (sumForUser < sumForCpu && sumForCpu <= 21){
-        console.log('Damn son the pc just roasted you')
         gameStatus.innerText = ''
         gameStatus.innerText = 'The cpu won!'
         gameStatusContainer.style.background = 'red'
 
     }
     if (sumForUser > sumForCpu && sumForUser > 21) {
-        console.log('damn you just got busted')
         gameStatus.innerText = ''
         gameStatus.innerText = 'You lost because your hand value exceeded 21'
         gameStatusContainer.style.background = 'red'
@@ -106,14 +105,14 @@ function endRound() {
     else if (sumForUser < sumForCpu && sumForCpu > 21){
         console.log('Congats you won because the cpu busted')
         gameStatus.innerText = ''
-        gameStatus.innerText = 'You Won because the cpus hand value exceeded 21'
+        gameStatus.innerText = 'You Won because the CPU hand value exceeded 21'
         gameStatusContainer.style.background = 'chartreuse'
     }
     
     else if (sumForUser === sumForCpu) {
         console.log('Congats on the tie')
         gameStatus.innerText = ''
-        gameStatus.innerText = 'Its a push since cpu hand value equaled the value of the cards in your hand.'
+        gameStatus.innerText = 'Its a push since CPU hand value equaled the value of the cards in your hand.'
         gameStatusContainer.style.background = 'yellow'
    
     }
@@ -187,6 +186,10 @@ if (sumForCpu > 21){
             }    
         }
     }
+    console.log(userHand)
+        console.log(cpuHand)
+        console.log(sumForUser)
+        console.log(sumForCpu)
 } 
 
 } /////Everything currently console.log correct from 22-28
@@ -216,6 +219,7 @@ cpuHand.push(deck[randomNumber2])}
 //console.log(userHand)
 //console.log(cpuHand)
 initialHandValues(userHand, cpuHand)
+
 }
 
 
