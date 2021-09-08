@@ -14,16 +14,42 @@
     <div class="container-md mt-2" id="gameStatus-Container">
         <H1 id="heading-gameStatus">Game Status:<span id="gameStatus"></span></H1>
       </div>
-    <h1>Your Current Hand:<span id="display-users-hand"></span></h1>
-    <h2>Current Value of Hand (user):<span id="hand-value-user"></span> </h2>
-    <h1>Computers Current Hand:</h1><span id="display-cpus-hand"></span>
-    <h2>Current Value of Hand (cpu):<span id="hand-value-cpu"></span></h2>
+
+      <div class="container mt-2 mb-2" id="scoreContainer">
+        <div class="row">
+          <div class="col-6 chipTrackers">
+            Current Chip Count:
+          </div>
+          <div class="col-3">
+            <span id="currentChipCount"></span>
+          </div>
+          <div class="col-3">
+            <button class="betControls" id="increaseBtn" onclick= betSettler()>Increase Next Bet</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 chipTrackers">
+            Bet For Next Hand:
+          </div>
+          <div class="col-3">
+            <span id="betForNextHand"></span>
+          </div>
+          <div class="col-3">
+            <button class="betControls" id="decreaseBtn" onclick="betSettler()">Decrease Next Bet</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12" id="dealHandBtn">
+            <button id="nextHandBtn" onclick="dealCards()">Next Hand </button>
+          </div>
+        </div>
+      </div>
     <button id="placeBetBtn">Place Bet</button>
     <button id="increaseBetBtn">Increase Bet</button>
     <button id="decreaseBetBtn">Decrease Bet</button>
-    <button class="deal-cards" onclick="dealCards()">Deal Cards</button>
+    <button class="deal-cards" ">Deal Cards</button>
     <button class= "hit" onclick="userRequestedCard()">Click Here to Request Another Card</button>
-    <button id="stay">Click Here to End Your Turn</button>
+    <button id="stay">Stay</button>
       
 
     <!-- Optional JavaScript; choose one of the two! -->

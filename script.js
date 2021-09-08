@@ -19,13 +19,37 @@ var hasSecondAce = false
 var hasThirdAce = false
 var hasFourthAce = false
 var endTurnBtn = document.getElementById('stay').addEventListener('click',cpuTurn)
-var userChipValue = 500
+var availableChips = 500
 var currentPotValue = 0
+var wagerForNextHand = 25
 var data = window.localStorage
-data.setItem('userChipValue', userChipValue)
+
 
 //Getting Elements on HTML
 var gameStatus = document.getElementById('gameStatus')
+var gameStatusContainer = document.getElementById('gameStatus-Container')
+var betForNextHand = document.getElementById('betForNextHand')
+var userChipValue = document.getElementById('currentChipCount').innerText = availableChips
+betForNextHand.innerText = wagerForNextHand
+
+//Event Listners
+var increaseBet = document.getElementById('increaseBtn')
+var decreaseBet = document.getElementById('decreaseBtn')
+increaseBet.addEventListener('click',betSettler)
+decreaseBet.addEventListener('click', betSettler)
+// wagerForNextHand +=25, availableChips -= 25
+// wagerForNextHand-=25, availableChips += 25
+function betSettler () {
+    if(increaseBet === true){
+        console.log('It worked')
+    }
+    console.log(increaseBet.click)
+    data.removeItem('userChipValue', userChipValue)
+    data.setItem('userChipValue', userChipValue)
+    console.log(availableChips)
+    console.log(wagerForNextHand)
+}
+
 
 function startGame (){
     gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
@@ -43,6 +67,7 @@ function userRequestedCard(){
                 if(userHand[a].is1 === false){
                     userHand[a].is1 = true
                     sumForUser -= 10
+                    console.log(sumForUser)
                     break
                 }    
             }
@@ -63,27 +88,33 @@ function endRound() {
         console.log('Damn son the pc just roasted you')
         gameStatus.innerText = ''
         gameStatus.innerText = 'The cpu won!'
+        gameStatusContainer.style.background = 'red'
+
     }
     if (sumForUser > sumForCpu && sumForUser > 21) {
         console.log('damn you just got busted')
         gameStatus.innerText = ''
         gameStatus.innerText = 'You lost because your hand value exceeded 21'
+        gameStatusContainer.style.background = 'red'
     }
     if (sumForUser > sumForCpu && sumForUser <= 21){
         console.log('Congrats you won!')
         gameStatus.innerText = ''
-        gameStatus.innerText = 'Congrats you won!'   
+        gameStatus.innerText = 'Congrats you won!'
+        gameStatusContainer.style.background = 'chartreuse'   
     }
     else if (sumForUser < sumForCpu && sumForCpu > 21){
         console.log('Congats you won because the cpu busted')
         gameStatus.innerText = ''
         gameStatus.innerText = 'You Won because the cpus hand value exceeded 21'
+        gameStatusContainer.style.background = 'chartreuse'
     }
     
     else if (sumForUser === sumForCpu) {
         console.log('Congats on the tie')
         gameStatus.innerText = ''
-        gameStatus.innerText = 'You lost because your hand value exceeded 21'
+        gameStatus.innerText = 'Its a push since cpu hand value equaled the value of the cards in your hand.'
+        gameStatusContainer.style.background = 'yellow'
    
     }
     sumForUser = 0
