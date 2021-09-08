@@ -19,7 +19,17 @@ var hasSecondAce = false
 var hasThirdAce = false
 var hasFourthAce = false
 var endTurnBtn = document.getElementById('stay').addEventListener('click',cpuTurn)
+var userChipValue = 500
+var currentPotValue = 0
+var data = window.localStorage
+data.setItem('userChipValue', userChipValue)
 
+//Getting Elements on HTML
+var gameStatus = document.getElementById('gameStatus')
+
+function startGame (){
+    gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
+}
 //Need to create a function that is able to extract the values from the values property for each player. 
 function userRequestedCard(){
     randomNumber = Math.floor(Math.random()* deck.length)
@@ -51,20 +61,30 @@ function userRequestedCard(){
 function endRound() {
     if (sumForUser < sumForCpu && sumForCpu <= 21){
         console.log('Damn son the pc just roasted you')
+        gameStatus.innerText = ''
+        gameStatus.innerText = 'The cpu won!'
     }
     if (sumForUser > sumForCpu && sumForUser > 21) {
         console.log('damn you just got busted')
+        gameStatus.innerText = ''
+        gameStatus.innerText = 'You lost because your hand value exceeded 21'
     }
     if (sumForUser > sumForCpu && sumForUser <= 21){
-        console.log('Congrats on winning through all the trials and turbulations')
+        console.log('Congrats you won!')
+        gameStatus.innerText = ''
+        gameStatus.innerText = 'Congrats you won!'   
     }
     else if (sumForUser < sumForCpu && sumForCpu > 21){
         console.log('Congats you won because the cpu busted')
+        gameStatus.innerText = ''
+        gameStatus.innerText = 'You Won because the cpus hand value exceeded 21'
     }
     
     else if (sumForUser === sumForCpu) {
         console.log('Congats on the tie')
-        
+        gameStatus.innerText = ''
+        gameStatus.innerText = 'You lost because your hand value exceeded 21'
+   
     }
     sumForUser = 0
     sumForCpu = 0
@@ -113,21 +133,44 @@ cpuValuesArray.push(cH[i].weight)
 /// getting iniitial sum for user *Test*
 sumForUser += userValuesArray[i]
 sumForCpu += cpuValuesArray[i]
+if (sumForUser > 21){
+    for (var a = 0; a < userHand.length; a++){
+        console.log(`Lets see if this is an "A" ${userHand[a].value}`)
+        if(userHand[a].value === "A"){
+            if(userHand[a].is1 === false){
+                userHand[a].is1 = true
+                sumForUser -= 10
+                break
+            }    
+        }
+    }
+}
+if (sumForCpu > 21){
+    for (var c = 0; c < cpuHand.length; c++){
+        console.log(`Lets see if this is an "A" ${cpuHand[c].value}`)
+        if(cpuHand[c].value === "A"){
+            if(cpuHand[c].is1 === false){
+                cpuHand[c].is1 = true
+                sumForCpu -= 10
+                break
+            }    
+        }
+    }
+} 
+
 } /////Everything currently console.log correct from 22-28
 console.log(userValuesArray)
 console.log(cpuValuesArray)
 console.log(sumForUser)
 console.log(sumForCpu)
+
+gameStatus.innerText = 'You can either choose to get dealt another card or you can press stay to end your turn and let the computer play out its hand'
 if (sumForUser === 21){
-    console.log('Congrats You got 21')
     endRound()
 }
 if (sumForCpu === 21) {
-    console.log('Unfortunately the cpu won')
     endRound()
-}
-
-
+    }
 }
 
 function dealCards() //This function assigns a hand to each player
@@ -185,3 +228,4 @@ function getDeck()
       
     return deck;
 }
+startGame()
