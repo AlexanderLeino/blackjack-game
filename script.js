@@ -24,7 +24,6 @@ var currentPotValue = 0
 var wagerForNextHand = 25
 var data = window.localStorage
 
-
 //Getting Elements on HTML
 var gameStatus = document.getElementById('gameStatus')
 var gameStatusContainer = document.getElementById('gameStatus-Container')
@@ -40,50 +39,81 @@ var decreaseBet = document.getElementById('decreaseBtn')
 // wagerForNextHand +=25, availableChips -= 25
 // wagerForNextHand-=25, availableChips += 25
 // function betSettler () {
-//     if(increaseBet === true){
-//         console.log('It worked')
-//     }
-//     console.log(increaseBet.click)
-//     data.removeItem('userChipValue', userChipValue)
-//     data.setItem('userChipValue', userChipValue)
-//     console.log(availableChips)
-//     console.log(wagerForNextHand)
-// }
-
-
-function startGame (){
-    gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
-}
-//Need to create a function that is able to extract the values from the values property for each player. 
-function userRequestedCard(){
-    randomNumber = Math.floor(Math.random()* deck.length)
-    sumForUser += deck[randomNumber].weight
-    userHand.push(deck[randomNumber])
-    console.log(`Sum for the user ${sumForUser}`)
-    if (sumForUser > 21){
-        for (var a = 0; a < userHand.length; a++){
-            console.log(`Lets see if this is an "A" ${userHand[a].value}`)
-            if(userHand[a].value === "A"){
-                if(userHand[a].is1 === false){
-                    userHand[a].is1 = true
-                    sumForUser -= 10
-                    console.log(sumForUser)
-                    break
-                }    
+    //     if(increaseBet === true){
+        //         console.log('It worked')
+        //     }
+        //     console.log(increaseBet.click)
+        //     data.removeItem('userChipValue', userChipValue)
+        //     data.setItem('userChipValue', userChipValue)
+        //     console.log(availableChips)
+        //     console.log(wagerForNextHand)
+        // }
+        
+        
+        function startGame (){
+            gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
+        }
+        //Need to create a function that is able to extract the values from the values property for each player. 
+        function userRequestedCard(){
+            randomNumber = Math.floor(Math.random()* deck.length)
+            sumForUser += deck[randomNumber].weight
+            userHand.push(deck[randomNumber])
+            console.log(`Sum for the user ${sumForUser}`)
+            if (sumForUser > 21){
+                for (var a = 0; a < userHand.length; a++){
+                    console.log(`Lets see if this is an "A" ${userHand[a].value}`)
+                    if(userHand[a].value === "A"){
+                        if(userHand[a].is1 === false){
+                            userHand[a].is1 = true
+                            sumForUser -= 10
+                            console.log(sumForUser)
+                            break
+                        }    
+                    }
+                }
+                renderCards()  
+            } 
+            if (sumForUser > 21 && userHand.value != "A"){
+                endRound()
+            }
+            if (sumForUser === 21){
+                { endRound()
+                    
+                }
             }
         }
-        
-    } 
-    if (sumForUser > 21 && userHand.value != "A"){
-        endRound()
-    }
-    if (sumForUser === 21){
-    { endRound()
-            
-        }
+        function renderCards (){
+            var playerHandDisplay = document.getElementById('player-hand-display')
+            console.log(userHand)
+            console.log(userHand.length)
+            for(var i = 0; i < userHand.length; i++){
+                var playingCard = document.createElement('div')
+                playingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+                playerHandDisplay.appendChild(playingCard)
+                
+                var topGem = document.createElement('i')
+                topGem.setAttribute('id', 'top-gem')
+                topGem.setAttribute('class','fas fa-gem')
+                playingCard.appendChild(topGem)
+
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('id','bottom-gem')
+                bottomGem.setAttribute('class','fas fa-gem')
+                playingCard.appendChild(bottomGem)
+
+                var topNum = document.createElement('div')
+                topNum.setAttribute('id', 'cardnumber-top')
+                topNum.innerHTML = userHand[i].value
+                playingCard.appendChild(topNum)
+
+                var bottomNum = document.createElement('div')
+                bottomNum.setAttribute('id', 'cardnumber-bottom')
+                bottomNum.innerHTML = userHand[i].value
+                playingCard.appendChild(bottomNum)
+
+
     }
 }
-
 function endRound() {
     if (sumForUser < sumForCpu && sumForCpu <= 21){
         gameStatus.innerText = ''
@@ -219,6 +249,7 @@ cpuHand.push(deck[randomNumber2])}
 //console.log(userHand)
 //console.log(cpuHand)
 initialHandValues(userHand, cpuHand)
+renderCards()
 
 }
 

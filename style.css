@@ -1,7 +1,36 @@
-*{
-    margin: 0;
-    padding: 0;
+#top-gem {
+    position: absolute;
+    left: 9px;
+    margin-top: 33px;
 }
+#bottom-gem {
+    position: absolute;
+    left: 120px;
+    margin-top: 130px;
+    transform: rotate(180deg);
+}
+#cardnumber-top{
+    margin-bottom: -20px;
+    color: red;
+    position: absolute;
+    left: 14px;
+    font-size: 25px;
+}
+#cardnumber-bottom {
+    position: absolute;
+    left: 120px;
+    margin-top: 140px;
+    font-size: 25px;
+    transform: rotate(180deg);
+
+}
+.users-card {
+    height: 175px;
+    background-color: white;
+    border: black 1px solid;
+    width: 135px;
+}
+
 #gameStatus-Container {
     border: 3px black solid;
     border-radius: 20px;
@@ -31,4 +60,18 @@
 }
 .betControls {
     width: 100%;
+}
+#player-hand-display{
+    background-color: rgb(61, 109, 12);
+    height: 200px;
+    width: 100vw;
+    border: black 3px solid;
+    box-shadow: black 10px 5px 5px;
+}
+#cpu-hand-display{
+    background-color: rgb(61, 109, 12);
+    height: 200px;
+    width: 100vw;
+    border: black 3px solid;
+    box-shadow: black 10px 5px 5px;
 }

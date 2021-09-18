@@ -8,14 +8,31 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Hello, world!</title>
+    <title>Alex's Black Jack Game</title>
   </head>
   <body>
     <div class="container-md mt-2" id="gameStatus-Container">
         <H1 id="heading-gameStatus">Game Status:<span id="gameStatus"></span></H1>
       </div>
 
-      <div class="container mt-2 mb-2" id="scoreContainer">
+    <div class="container ms-2"></div>
+      <div class="row">
+        <H3>Your Current Hand:</H3>
+      <div class="row" id="player-hand-display">
+        <div class="col-1 m-2 ms-3 users-card">
+          <i class="fas fa-gem" id="top-gem"></i>
+          <i class="fas fa-gem" id="bottom-gem"></i>
+          <div id="cardnumber-top">5</div>
+          <div id="cardnumber-bottom">5</div>
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="container ms-2 mt-2"></div>
+        <H3>Computers Current Hand</H3>
+      <div class="row" id="cpu-hand-display"></div>
+      </div>
+      <div class="container mt-4 mb-2" id="scoreContainer">
         <div class="row">
           <div class="col-6 chipTrackers">
             Current Chip Count:
@@ -43,18 +60,22 @@
             <button id="nextHandBtn" onclick="dealCards()">Next Hand </button>
           </div>
         </div>
-      </div>
-    <button id="placeBetBtn">Place Bet</button>
-    <button id="increaseBetBtn">Increase Bet</button>
-    <button id="decreaseBetBtn">Decrease Bet</button>
-    <button class= "hit" onclick="userRequestedCard()">Click Here to Request Another Card</button>
-    <button id="stay">Stay</button>
+        <div class="container-fluid">
+          <button id="placeBetBtn">Place Bet</button>
+          <button id="increaseBetBtn">Increase Bet</button>
+          <button id="decreaseBetBtn">Decrease Bet</button>
+          <button class= "hit" onclick="userRequestedCard()">Click Here to Request Another Card</button>
+          <button id="stay">Stay</button>
+        </div>
+
+        </div>
       
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ae5e1b21b5.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
