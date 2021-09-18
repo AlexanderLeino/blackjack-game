@@ -84,6 +84,7 @@ var decreaseBet = document.getElementById('decreaseBtn')
         }
         function renderCards (){
             var playerHandDisplay = document.getElementById('player-hand-display')
+            var cpuHandDisplay = document.getElementById('cpu-hand-display')
             console.log(userHand)
             console.log(userHand.length)
             for(var i = 0; i < userHand.length; i++){
@@ -110,8 +111,11 @@ var decreaseBet = document.getElementById('decreaseBtn')
                 bottomNum.setAttribute('id', 'cardnumber-bottom')
                 bottomNum.innerHTML = userHand[i].value
                 playingCard.appendChild(bottomNum)
-
-
+    }        
+            for(var y = 0; y < cpuHand.length; y++){
+            var playingCardCpu = document.createElement('div')
+            playingCardCpu.setAttribute('class',"col-1 m-2 ms-3 users-card")
+            cpuHandDisplay.appendChild(playingCardCpu)
     }
 }
 function endRound() {
