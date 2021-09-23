@@ -1,27 +1,28 @@
-#top-gem {
-    position: absolute;
-    left: 9px;
-    margin-top: 33px;
+.topGem {
+position: relative;
+left: -11px;
+top: 21px;
+
 }
-#bottom-gem {
-    position: absolute;
-    left: 120px;
-    margin-top: 130px;
-    transform: rotate(180deg);
+.bottomGem {
+position: relative;
+top: 126px;
+left: 85px;
+transform: rotate(180deg);
 }
-#cardnumber-top{
-    margin-bottom: -20px;
+.cardnumber-top{
+    top: -30px;
     color: red;
-    position: absolute;
-    left: 14px;
-    font-size: 25px;
+    position: relative;
+    left: -9px;
+    font-size: 24px;
 }
-#cardnumber-bottom {
-    position: absolute;
-    left: 120px;
-    margin-top: 140px;
+.cardnumber-bottom {
+    position: relative;
+    margin-top: 83px;
     font-size: 25px;
     transform: rotate(180deg);
+    left: 10px;
 
 }
 .users-card {
