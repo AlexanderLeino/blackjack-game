@@ -20,7 +20,9 @@ var hasSecondAce = false
 var hasThirdAce = false
 var hasFourthAce = false
 
+//Variables for html buttons
 var endTurnBtn = document.getElementById('stay').addEventListener('click',cpuTurn)
+var nextHandBtn = document.getElementById('nextHandBtn')
 
 var availableChips = 500
 var currentPotValue = 0
@@ -47,11 +49,15 @@ decreaseBet.addEventListener('click', betSettler)
 wagerForNextHand +=25, availableChips -= 25
 wagerForNextHand-=25, availableChips += 25
 
+let userHandDisplayArray = []
+let cpuHandDisplayArray = []
+
 function betSettler () {
 }
 
 function startGame (){
     gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
+    
 }
 //Need to create a function that is able to extract the values from the values property for each player. 
 function userRequestedCard(){
@@ -59,6 +65,7 @@ function userRequestedCard(){
     sumForUser += deck[randomNumber].weight
     userHand.push(deck[randomNumber])
     console.log(`Sum for the user ${sumForUser}`)
+    currentHandValueDisplay.innerText = sumForUser
     if (sumForUser > 21){
         for (var a = 0; a < userHand.length; a++){
             console.log(`Lets see if this is an "A" ${userHand[a].value}`)
@@ -71,8 +78,7 @@ function userRequestedCard(){
                 }    
             }
         }
-        currentHandValueDisplay.innerText = sumForUser
-        renderCards()  
+        
     } 
     if (sumForUser > 21 && userHand.value != "A"){
         endRound()
@@ -82,10 +88,32 @@ function userRequestedCard(){
             
         }
     }
+    renderCards()  
 }
 function renderCards (){
+    //Filters to determine if cards are already being displayed or not
+    //    for(let r = 0; r < requestCount; r++){
+    userHandDisplayArray = userHand.filter( displayCards => {
+        if (userHandDisplayArray.includes(displayCards)){
+            return false
+         }
+         else {
+             return true
+         }
+     })
+     cpuHandDisplayArray = cpuHand.filter( displayCards2 => {
+         if (cpuHandDisplayArray.includes(displayCards2)){
+             return false
+         }
+         else {
+             return true
+         }
     
-    for(var i = 0; i < userHand.length; i++){
+     })
+       
+//    }
+    console.log(userHandDisplayArray)
+    for(var i = 0; i < userHandDisplayArray.length; i++){
         var userPlayingCard = document.createElement('div')
         userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
         playerHandDisplay.appendChild(userPlayingCard)
@@ -108,7 +136,7 @@ function renderCards (){
         bottomNum.innerHTML = userHand[i].value
         userPlayingCard.appendChild(bottomNum)
     }        
-    for(var y = 0; y < cpuHand.length; y++){
+    for(var y = 0; y < cpuHandDisplayArray.length; y++){
         var cpuPlayingCard = document.createElement('div')
         cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
         cpuHandDisplay.appendChild(cpuPlayingCard)
@@ -168,7 +196,10 @@ function endRound() {
         gameStatusContainer.style.background = 'yellow'
    
     }
-    
+    console.log(userHand)
+    console.log(cpuHand)
+    console.log(sumForCpu)
+    console.log(sumForUser)
 }
 function nextHand() {
     sumForUser = 0
@@ -210,8 +241,6 @@ function cpuTurn() {
     }
     
     renderCards()
-    console.log(cpuHand)
-    console.log(sumForCpu)
     }
 
 function initialHandValues (uH,cH){ ///Calculates the initial values for hands and then checks if either player or cpu has 21
@@ -222,7 +251,7 @@ cpuValuesArray.push(cH[i].weight)
 sumForUser += userValuesArray[i]
 sumForCpu += cpuValuesArray[i]
 if (sumForUser > 21){
-    for (var a = 0; a < userHand.length; a++){
+    for (let a = 0; a < userValuesArray.length; a++){
         console.log(`Lets see if this is an "A" ${userHand[a].value}`)
         if(userHand[a].value === "A"){
             if(userHand[a].is1 === false){
@@ -244,18 +273,7 @@ if (sumForCpu > 21){
             }    
         }
     }
-    console.log(userHand)
-        console.log(cpuHand)
-        console.log(sumForUser)
-        console.log(sumForCpu)
-} 
-
-} /////Everything currently console.log correct from 22-28
-console.log(userValuesArray)
-console.log(cpuValuesArray)
-console.log(sumForUser)
-console.log(sumForCpu)
-
+}renderCards() } /////Everything currently console.log correct from 22-28
 gameStatus.innerText = 'You can either choose to get dealt another card or you can press stay to end your turn and let the computer play out its hand'
 if (sumForUser === 21){
     endRound()
@@ -270,15 +288,11 @@ function dealCards() //This function assigns a hand to each player
 for(i = 0; i < 2; i++){
 randomNumber = Math.floor(Math.random()* deck.length)
 randomNumber2 = Math.floor(Math.random()* deck.length)
-//console.log(randomNumber)
-//console.log(randomNumber2)
+
 userHand.push(deck[randomNumber])
 cpuHand.push(deck[randomNumber2])}
-//console.log(userHand)
-//console.log(cpuHand)
-initialHandValues(userHand, cpuHand)
-renderCards()
 
+initialHandValues(userHand, cpuHand)
 }
 
 
