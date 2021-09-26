@@ -166,7 +166,7 @@ function renderCards (firstCard, newCard){
         userPlayingCard.appendChild(bottomNum)
     } 
     currentHandValueDisplay.innerText = sumForUser
-    currentCpuHandValue.innerText = sumForCpu-cpuHand[0].value
+    currentCpuHandValue.innerText = sumForCpu-cpuHand[0].weight
     console.log(cpuHand[0].value)
 }
 function renderCpuCards(firstCardCpu,newCardCpu){
@@ -368,6 +368,7 @@ userHand.push(deck[randomNumber])
 cpuHand.push(deck[randomNumber2])}
 nextHandBtn.style.color ='white'
 nextHandBtn.disabled = true
+console.log(cpuHand)
 
 initialHandValues(userHand, cpuHand)
 }
