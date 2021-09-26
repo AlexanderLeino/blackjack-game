@@ -33,6 +33,8 @@ var cpuHandDisplay = document.getElementById('cpu-hand-display')
 let currentHandValueDisplay = document.getElementById('currentHandValue')
 let currentCpuHandValue = document.getElementById('cpuCurrentHandValue')
 
+// Declaring these variables to be able to remove the children form the parent div for each card created 
+
 var data = window.localStorage
 //Getting Elements on HTML
 var gameStatus = document.getElementById('gameStatus')
@@ -57,6 +59,26 @@ function betSettler () {
 
 function startGame (){
     gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
+    if(sumForUser > 0 && sumForCpu > 0){
+        
+        let cpuHandDisplayChildren = document.getElementById('cpu-hand-display').children
+        
+
+        sumForUser = 0
+        sumForCpu = 0
+        userHand = []
+        cpuHand = []
+        userValuesArray = []
+        cpuValuesArray = []
+        
+        dealCards()
+
+    }
+    else {
+        dealCards()
+    }
+
+    
     
 }
 //Need to create a function that is able to extract the values from the values property for each player. 
@@ -88,32 +110,38 @@ function userRequestedCard(){
             
         }
     }
-    renderCards()  
+    renderCards(false,deck[randomNumber])  
 }
-function renderCards (){
-    //Filters to determine if cards are already being displayed or not
-    //    for(let r = 0; r < requestCount; r++){
-    userHandDisplayArray = userHand.filter( displayCards => {
-        if (userHandDisplayArray.includes(displayCards)){
-            return false
-         }
-         else {
-             return true
-         }
-     })
-     cpuHandDisplayArray = cpuHand.filter( displayCards2 => {
-         if (cpuHandDisplayArray.includes(displayCards2)){
-             return false
-         }
-         else {
-             return true
-         }
-    
-     })
-       
-//    }
-    console.log(userHandDisplayArray)
-    for(var i = 0; i < userHandDisplayArray.length; i++){
+function renderCards (firstCard, newCard){
+    console.log(firstCard)
+    if (firstCard){
+        for(var i = 0; i < userHand.length; i++){
+            var userPlayingCard = document.createElement('div')
+            userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+            playerHandDisplay.appendChild(userPlayingCard)
+            
+            var topGem = document.createElement('i')
+            topGem.setAttribute('class', 'topGem fas fa-gem',)
+            userPlayingCard.appendChild(topGem)
+            
+            var bottomGem = document.createElement('i')
+            bottomGem.setAttribute('class','bottomGem fas fa-gem')
+            userPlayingCard.appendChild(bottomGem)
+            
+            var topNum = document.createElement('div')
+            topNum.setAttribute('class', 'cardnumber-top')
+            topNum.innerHTML = userHand[i].value
+            userPlayingCard.appendChild(topNum)
+            
+            var bottomNum = document.createElement('div')
+            bottomNum.setAttribute('class', 'cardnumber-bottom')
+            bottomNum.innerHTML = userHand[i].value
+            userPlayingCard.appendChild(bottomNum)
+        }
+        
+    }
+    else {
+        
         var userPlayingCard = document.createElement('div')
         userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
         playerHandDisplay.appendChild(userPlayingCard)
@@ -128,15 +156,45 @@ function renderCards (){
         
         var topNum = document.createElement('div')
         topNum.setAttribute('class', 'cardnumber-top')
-        topNum.innerHTML = userHand[i].value
+        topNum.innerHTML = newCard.value
         userPlayingCard.appendChild(topNum)
         
         var bottomNum = document.createElement('div')
         bottomNum.setAttribute('class', 'cardnumber-bottom')
-        bottomNum.innerHTML = userHand[i].value
+        bottomNum.innerHTML = newCard.value
         userPlayingCard.appendChild(bottomNum)
-    }        
-    for(var y = 0; y < cpuHandDisplayArray.length; y++){
+    } 
+    currentHandValueDisplay.innerText = sumForUser
+    currentCpuHandValue.innerText = sumForCpu
+}
+function renderCpuCards(firstCardCpu,newCardCpu){
+    if (firstCardCpu){
+        for(var y = 0; y < cpuHand.length; y++){
+            var cpuPlayingCard = document.createElement('div')
+            cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+            cpuHandDisplay.appendChild(cpuPlayingCard)
+            
+            var topGem = document.createElement('i')
+            topGem.setAttribute('class', 'topGem fas fa-gem',)
+            cpuPlayingCard.appendChild(topGem)
+            
+            var bottomGem = document.createElement('i')
+            bottomGem.setAttribute('class','bottomGem fas fa-gem')
+            cpuPlayingCard.appendChild(bottomGem)
+            
+            var topNum = document.createElement('div')
+            topNum.setAttribute('class', 'cardnumber-top')
+            topNum.innerHTML = cpuHand[y].value
+            console.log('the log you are looking for will appear below')
+            console.log(cpuHand[y].value)
+            cpuPlayingCard.appendChild(topNum)
+            
+            var bottomNum = document.createElement('div')
+            bottomNum.setAttribute('class', 'cardnumber-bottom')
+            bottomNum.innerHTML = cpuHand[y].value
+            cpuPlayingCard.appendChild(bottomNum)
+        }
+    } else {
         var cpuPlayingCard = document.createElement('div')
         cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
         cpuHandDisplay.appendChild(cpuPlayingCard)
@@ -151,16 +209,14 @@ function renderCards (){
         
         var topNum = document.createElement('div')
         topNum.setAttribute('class', 'cardnumber-top')
-        topNum.innerHTML = cpuHand[y].value
+        topNum.innerHTML = newCardCpu.value
         cpuPlayingCard.appendChild(topNum)
         
         var bottomNum = document.createElement('div')
         bottomNum.setAttribute('class', 'cardnumber-bottom')
-        bottomNum.innerHTML = cpuHand[y].value
+        bottomNum.innerHTML = newCardCpu.value
         cpuPlayingCard.appendChild(bottomNum)
     }
-    currentHandValueDisplay.innerText = sumForUser
-    currentCpuHandValue.innerText = sumForCpu
 }
 function endRound() {
         currentCpuHandValue.innerText = sumForCpu
@@ -196,18 +252,7 @@ function endRound() {
         gameStatusContainer.style.background = 'yellow'
    
     }
-    console.log(userHand)
-    console.log(cpuHand)
-    console.log(sumForCpu)
-    console.log(sumForUser)
-}
-function nextHand() {
-    sumForUser = 0
-    sumForCpu = 0
-    userHand = []
-    cpuHand = []
-    userValuesArray = []
-    cpuValuesArray = []
+
 }
 
 function cpuTurn() {
@@ -235,12 +280,12 @@ function cpuTurn() {
         randomNumber = Math.floor(Math.random()* deck.length)
         sumForCpu += deck[randomNumber].weight
         cpuHand.push(deck[randomNumber])
-        console.log(cpuHand)
-        cpuTurn()
         currentCpuHandValue.innerText = sumForCpu
+        renderCpuCards(false,deck[randomNumber])
+        cpuTurn()
     }
     
-    renderCards()
+    //renderCards()
     }
 
 function initialHandValues (uH,cH){ ///Calculates the initial values for hands and then checks if either player or cpu has 21
@@ -273,9 +318,10 @@ if (sumForCpu > 21){
             }    
         }
     }
-}renderCards() } /////Everything currently console.log correct from 22-28
-gameStatus.innerText = 'You can either choose to get dealt another card or you can press stay to end your turn and let the computer play out its hand'
-if (sumForUser === 21){
+    gameStatus.innerText = 'You can either choose to get dealt another card or you can press stay to end your turn and let the computer play out its hand'
+} }renderCards(true)
+    renderCpuCards(true) /////Everything currently console.log correct from 22-28
+    if (sumForUser === 21){
     endRound()
 }
 if (sumForCpu === 21) {
@@ -336,4 +382,3 @@ function getDeck()
       
     return deck;
 }
-startGame()
