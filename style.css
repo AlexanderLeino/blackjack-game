@@ -54,8 +54,9 @@ transform: rotate(180deg);
     font-size: 25px;
 }
 #nextHandBtn {
-    width: 100%;
+    width: 100%;  
 }
+
 .chipTrackers {
     border-right: 2px solid black;
 }
@@ -75,4 +76,11 @@ transform: rotate(180deg);
     width: 100vw;
     border: black 3px solid;
     box-shadow: black 10px 5px 5px;
+}
+.firstCardCpu {
+    
+    position: relative;
+    top: -162px;
+    left: -197px;
+    transform: scale(.45);
 }

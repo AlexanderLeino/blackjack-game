@@ -60,9 +60,9 @@ function betSettler () {
 function startGame (){
     gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
     if(sumForUser > 0 && sumForCpu > 0){
+        location.reload()
         
-        let cpuHandDisplayChildren = document.getElementById('cpu-hand-display').children
-        
+    
 
         sumForUser = 0
         sumForCpu = 0
@@ -75,6 +75,7 @@ function startGame (){
 
     }
     else {
+        
         dealCards()
     }
 
@@ -165,35 +166,63 @@ function renderCards (firstCard, newCard){
         userPlayingCard.appendChild(bottomNum)
     } 
     currentHandValueDisplay.innerText = sumForUser
-    currentCpuHandValue.innerText = sumForCpu
+    currentCpuHandValue.innerText = sumForCpu-cpuHand[0].value
+    console.log(cpuHand[0].value)
 }
 function renderCpuCards(firstCardCpu,newCardCpu){
     if (firstCardCpu){
         for(var y = 0; y < cpuHand.length; y++){
-            var cpuPlayingCard = document.createElement('div')
-            cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
-            cpuHandDisplay.appendChild(cpuPlayingCard)
-            
-            var topGem = document.createElement('i')
-            topGem.setAttribute('class', 'topGem fas fa-gem',)
-            cpuPlayingCard.appendChild(topGem)
-            
-            var bottomGem = document.createElement('i')
-            bottomGem.setAttribute('class','bottomGem fas fa-gem')
-            cpuPlayingCard.appendChild(bottomGem)
-            
-            var topNum = document.createElement('div')
-            topNum.setAttribute('class', 'cardnumber-top')
-            topNum.innerHTML = cpuHand[y].value
-            console.log('the log you are looking for will appear below')
-            console.log(cpuHand[y].value)
-            cpuPlayingCard.appendChild(topNum)
-            
-            var bottomNum = document.createElement('div')
-            bottomNum.setAttribute('class', 'cardnumber-bottom')
-            bottomNum.innerHTML = cpuHand[y].value
-            cpuPlayingCard.appendChild(bottomNum)
-        }
+            if(y === 0){
+                var cpuPlayingCard = document.createElement('div')
+                cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+                cpuHandDisplay.appendChild(cpuPlayingCard)
+                var cardBack = document.createElement('img')
+                cardBack.setAttribute('src','./Bicycle Cards.png')
+                cardBack.setAttribute('class','firstCardCpu')
+                cpuPlayingCard.appendChild(cardBack)
+                
+                // var topGem = document.createElement('i')
+                // topGem.setAttribute('class', 'topGem fas fa-gem',)
+                // cpuPlayingCard.appendChild(topGem)
+                
+                // var bottomGem = document.createElement('i')
+                // bottomGem.setAttribute('class','bottomGem fas fa-gem')
+                // cpuPlayingCard.appendChild(bottomGem)
+                
+                // var topNum = document.createElement('div')
+                // topNum.setAttribute('class', 'cardnumber-top')
+                // topNum.innerHTML = cpuHand[y].value
+                // cpuPlayingCard.appendChild(topNum)
+                
+                // var bottomNum = document.createElement('div')
+                // bottomNum.setAttribute('class', 'cardnumber-bottom')
+                // bottomNum.innerHTML = cpuHand[y].value
+                // cpuPlayingCard.appendChild(bottomNum)    
+            }
+            else {
+                var cpuPlayingCard = document.createElement('div')
+                cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+                cpuHandDisplay.appendChild(cpuPlayingCard)
+                
+                var topGem = document.createElement('i')
+                topGem.setAttribute('class', 'topGem fas fa-gem',)
+                cpuPlayingCard.appendChild(topGem)
+                
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem fas fa-gem')
+                cpuPlayingCard.appendChild(bottomGem)
+                
+                var topNum = document.createElement('div')
+                topNum.setAttribute('class', 'cardnumber-top')
+                topNum.innerHTML = cpuHand[y].value
+                cpuPlayingCard.appendChild(topNum)
+                
+                var bottomNum = document.createElement('div')
+                bottomNum.setAttribute('class', 'cardnumber-bottom')
+                bottomNum.innerHTML = cpuHand[y].value
+                cpuPlayingCard.appendChild(bottomNum)
+            }
+            }
     } else {
         var cpuPlayingCard = document.createElement('div')
         cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
@@ -239,7 +268,6 @@ function endRound() {
         gameStatusContainer.style.background = 'chartreuse'   
     }
     else if (sumForUser < sumForCpu && sumForCpu > 21){
-        console.log('Congats you won because the cpu busted')
         gameStatus.innerText = ''
         gameStatus.innerText = 'You Won because the CPU hand value exceeded 21'
         gameStatusContainer.style.background = 'chartreuse'
@@ -252,7 +280,8 @@ function endRound() {
         gameStatusContainer.style.background = 'yellow'
    
     }
-
+    nextHandBtn.style.color ='black'
+    nextHandBtn.disabled = false
 }
 
 function cpuTurn() {
@@ -337,6 +366,8 @@ randomNumber2 = Math.floor(Math.random()* deck.length)
 
 userHand.push(deck[randomNumber])
 cpuHand.push(deck[randomNumber2])}
+nextHandBtn.style.color ='white'
+nextHandBtn.disabled = true
 
 initialHandValues(userHand, cpuHand)
 }
