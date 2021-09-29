@@ -1,4 +1,6 @@
-
+.dealersFirstCard {
+    visibility: hidden;
+}
 
 .topGem {
 position: relative;

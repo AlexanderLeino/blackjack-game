@@ -32,7 +32,14 @@ var playerHandDisplay = document.getElementById('player-hand-display')
 var cpuHandDisplay = document.getElementById('cpu-hand-display')
 let currentHandValueDisplay = document.getElementById('currentHandValue')
 let currentCpuHandValue = document.getElementById('cpuCurrentHandValue')
-let roundHasEnded = false
+let firstTopGem
+let firstBottomGem
+let firstTopNum
+let firstBottomNum
+let cardBack
+
+
+let roundHasEnded = true
 
 // Declaring these variables to be able to remove the children form the parent div for each card created 
 
@@ -56,17 +63,17 @@ let userHandDisplayArray = []
 let cpuHandDisplayArray = []
 // dealerRevealFirstCard(firstTopGem,firstBottomGem,firstTopNum, firstBottomNum, cardBack)
 
-function  dealerRevealFirstCard(topGem, botGem, topNum, botNum, cardBack){
-    if(roundHasended){
+function  dealerRevealFirstCard(){
         cardBack.remove()
-        topGem.style.visibility = 'visible'
-        botGem.style.visibility = 'visible'
-        topNum.style.visibility = 'visible'
-        botNum.style.visibility = 'visible'
+        firstTopGem.style.visibility = 'visible'
+        firstBottomGem.style.visibility = 'visible'
+        firstTopNum.style.visibility = 'visible'
+        firstBottomNum.style.visibility = 'visible'
 
-    }
-    
-    
+        console.log(firstTopGem)
+        console.log(firstBottomGem)
+        console.log(firstTopNum)
+        console.log(firstBottomNum) 
 }
 function betSettler () {
 }
@@ -190,37 +197,33 @@ function renderCpuCards(firstCardCpu,newCardCpu){
                 cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
                 cpuHandDisplay.appendChild(cpuPlayingCard)
                 
-                var cardBack = document.createElement('img')
+                cardBack = document.createElement('img')
                 cardBack.setAttribute('src','./Bicycle Cards.png')
                 cardBack.setAttribute('class','firstCardCpu')
                 cpuPlayingCard.appendChild(cardBack)
                 
-                var firstTopGem = document.createElement('i')
+                firstTopGem = document.createElement('i')
                 firstTopGem.setAttribute('class', 'topGem fas fa-gem dealersFirstCard',)
                 firstTopGem.setAttribute('id', 'firstDealerCardTopG')
                 cpuPlayingCard.appendChild(firstTopGem)
                 
-                var firstBottomGem = document.createElement('i')
+                firstBottomGem = document.createElement('i')
                 firstBottomGem.setAttribute('class','bottomGem fas fa-gem dealersFirstCard')
                 firstBottomGem.setAttribute('id','dealersFirstCardBotGem')
                 cpuPlayingCard.appendChild(firstBottomGem)
                 
-                var firstTopNum = document.createElement('div')
+                firstTopNum = document.createElement('div')
                 firstTopNum.setAttribute('class', 'cardnumber-top dealersFirstCard')
                 firstTopNum.innerHTML = cpuHand[y].value
                 firstTopNum.setAttribute('id', 'dealersFirstCardTopNum')
                 cpuPlayingCard.appendChild(firstTopNum)
                 
-                var firstBottomNum = document.createElement('div')
+                firstBottomNum = document.createElement('div')
                 firstBottomNum.setAttribute('class', 'cardnumber-bottom dealersFirstCard')
                 firstBottomNum.setAttribute('id', 'dealersFirstCardBotNum')
                 firstBottomNum.innerHTML = cpuHand[y].value
                 // bottomNum.style.visibility = 'hidden'
                 cpuPlayingCard.appendChild(firstBottomNum)
-                
-                if(roundHasEnded) {
-                    dealerRevealFirstCard(firstTopGem,firstBottomGem,firstTopNum, firstBottomNum, cardBack)
-                }
             }
             else {
                 var cpuPlayingCard = document.createElement('div')
@@ -272,7 +275,6 @@ function renderCpuCards(firstCardCpu,newCardCpu){
 }
 function endRound()
 {
-    
     currentCpuHandValue.innerText = sumForCpu
     currentHandValueDisplay.innerText = sumForUser
     if (sumForUser < sumForCpu && sumForCpu <= 21){
@@ -307,6 +309,7 @@ function endRound()
     }
     nextHandBtn.style.color ='black'
     nextHandBtn.disabled = false
+    dealerRevealFirstCard()   
 }
 
 function cpuTurn() {
