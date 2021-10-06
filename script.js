@@ -1,7 +1,6 @@
 // We need to assign a value of ten to J, Q, K , and 11 to A [X]
 // Need to make a reset variable button for: currentHandValueUser && currentHandValueCpu and also resets function dealCards()
 //Need to create a function that allows us to check the initiial hand values for cpu and user and if cpu or user has 21 then said player wins
-
 var suits = ['diamonds', 'spades', 'clubs', 'hearts']
 var cardValues = ['2', '3', '4', '5', '6' , '7' , '8', '9','10' ,'J' ,'Q', 'K', 'A']
 var randomNumber
@@ -32,6 +31,7 @@ var playerHandDisplay = document.getElementById('player-hand-display')
 var cpuHandDisplay = document.getElementById('cpu-hand-display')
 let currentHandValueDisplay = document.getElementById('currentHandValue')
 let currentCpuHandValue = document.getElementById('cpuCurrentHandValue')
+//Needed to delcare cpu's face down card in global scope to be able to manipulate when endRound() is called
 let firstTopGem
 let firstBottomGem
 let firstTopNum
@@ -69,6 +69,7 @@ function  dealerRevealFirstCard(){
         firstBottomGem.style.visibility = 'visible'
         firstTopNum.style.visibility = 'visible'
         firstBottomNum.style.visibility = 'visible'
+        
 
         console.log(firstTopGem)
         console.log(firstBottomGem)
@@ -137,17 +138,58 @@ function userRequestedCard(){
 function renderCards (firstCard, newCard){
     if (firstCard){
         for(var i = 0; i < userHand.length; i++){
+            console.log(userHand[i].Suit)
             var userPlayingCard = document.createElement('div')
             userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
             playerHandDisplay.appendChild(userPlayingCard)
             
-            var topGem = document.createElement('i')
-            topGem.setAttribute('class', 'topGem fas fa-gem',)
-            userPlayingCard.appendChild(topGem)
+            switch(userHand[i].Suit){
+           
+            case 'diamonds':
+                var topGem = document.createElement('i')
+                // Create a switch statement
+                topGem.setAttribute('class', 'topGem bi bi-suit-diamond-fill',)
+                userPlayingCard.appendChild(topGem)
+    
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-diamond-fill')
+                userPlayingCard.appendChild(bottomGem)
+                break;
+
+            case 'hearts':
+                var topGem = document.createElement('i')
+                // Create a switch statement
+                topGem.setAttribute('class', 'topGem bi bi-suit-heart-fill',)
+                userPlayingCard.appendChild(topGem)
+
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-heart-fill')
+                userPlayingCard.appendChild(bottomGem)
+                break;
+
+            case 'spades':
+                var topGem = document.createElement('i')
+                // Create a switch statement
+                topGem.setAttribute('class', 'topGem bi bi-suit-spade-fill',)
+                userPlayingCard.appendChild(topGem)
+
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-spade-fill')
+                userPlayingCard.appendChild(bottomGem)
+                break;
             
-            var bottomGem = document.createElement('i')
-            bottomGem.setAttribute('class','bottomGem fas fa-gem')
-            userPlayingCard.appendChild(bottomGem)
+            case 'clubs':
+                var topGem = document.createElement('i')
+                // Create a switch statement
+                topGem.setAttribute('class', 'topGem bi bi-suit-club-fill',)
+                userPlayingCard.appendChild(topGem)
+
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-club-fill')
+                userPlayingCard.appendChild(bottomGem)
+                break;
+            }
+
             
             var topNum = document.createElement('div')
             topNum.setAttribute('class', 'cardnumber-top')
@@ -167,14 +209,53 @@ function renderCards (firstCard, newCard){
         userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
         playerHandDisplay.appendChild(userPlayingCard)
         
-        var topGem = document.createElement('i')
-        topGem.setAttribute('class', 'topGem fas fa-gem',)
-        userPlayingCard.appendChild(topGem)
-        
-        var bottomGem = document.createElement('i')
-        bottomGem.setAttribute('class','bottomGem fas fa-gem')
-        userPlayingCard.appendChild(bottomGem)
-        
+        switch(newCard.Suit){
+           
+            case 'diamonds':
+                var topGem = document.createElement('i')
+                // Create a switch statement
+                topGem.setAttribute('class', 'topGem bi bi-suit-diamond-fill',)
+                userPlayingCard.appendChild(topGem)
+    
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-diamond-fill')
+                userPlayingCard.appendChild(bottomGem)
+                break;
+
+            case 'hearts':
+                var topGem = document.createElement('i')
+                // Create a switch statement
+                topGem.setAttribute('class', 'topGem bi bi-suit-heart-fill',)
+                userPlayingCard.appendChild(topGem)
+
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-heart-fill')
+                userPlayingCard.appendChild(bottomGem)
+                break;
+
+            case 'spades':
+                var topGem = document.createElement('i')
+                // Create a switch statement
+                topGem.setAttribute('class', 'topGem bi bi-suit-spade-fill',)
+                userPlayingCard.appendChild(topGem)
+
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-spade-fill')
+                userPlayingCard.appendChild(bottomGem)
+                break;
+            
+            case 'clubs':
+                var topGem = document.createElement('i')
+                // Create a switch statement
+                topGem.setAttribute('class', 'topGem bi bi-suit-club-fill',)
+                userPlayingCard.appendChild(topGem)
+
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-club-fill')
+                userPlayingCard.appendChild(bottomGem)
+                break;
+            }
+
         var topNum = document.createElement('div')
         topNum.setAttribute('class', 'cardnumber-top')
         topNum.innerHTML = newCard.value
@@ -201,17 +282,59 @@ function renderCpuCards(firstCardCpu,newCardCpu){
                 cardBack.setAttribute('src','./Bicycle Cards.png')
                 cardBack.setAttribute('class','firstCardCpu')
                 cpuPlayingCard.appendChild(cardBack)
-                
+            switch(cpuHand[y].Suit){
+            
+                case 'diamonds':
                 firstTopGem = document.createElement('i')
-                firstTopGem.setAttribute('class', 'topGem fas fa-gem dealersFirstCard',)
+                firstTopGem.setAttribute('class', 'topGem  bi bi-suit-diamond-fill dealersFirstCard',)
                 firstTopGem.setAttribute('id', 'firstDealerCardTopG')
                 cpuPlayingCard.appendChild(firstTopGem)
                 
                 firstBottomGem = document.createElement('i')
-                firstBottomGem.setAttribute('class','bottomGem fas fa-gem dealersFirstCard')
+                firstBottomGem.setAttribute('class','bottomGem  bi bi-suit-diamond-fill dealersFirstCard')
                 firstBottomGem.setAttribute('id','dealersFirstCardBotGem')
                 cpuPlayingCard.appendChild(firstBottomGem)
+                break;
+
+                case 'spades':
+                firstTopGem = document.createElement('i')
+                firstTopGem.setAttribute('class', 'topGem bi bi-suit-spade-fill dealersFirstCard',)
+                firstTopGem.setAttribute('id', 'firstDealerCardTopG')
+                cpuPlayingCard.appendChild(firstTopGem)
                 
+                firstBottomGem = document.createElement('i')
+                firstBottomGem.setAttribute('class','bottomGem bi bi-suit-spade-fill dealersFirstCard')
+                firstBottomGem.setAttribute('id','dealersFirstCardBotGem')
+                cpuPlayingCard.appendChild(firstBottomGem)
+                break;
+
+                case 'hearts':
+                    firstTopGem = document.createElement('i')
+                    firstTopGem.setAttribute('class', 'topGem bi bi-suit-heart-fill dealersFirstCard',)
+                    firstTopGem.setAttribute('id', 'firstDealerCardTopG')
+                    cpuPlayingCard.appendChild(firstTopGem)
+                    
+                    firstBottomGem = document.createElement('i')
+                    firstBottomGem.setAttribute('class','bottomGem bi bi-suit-heart-fill dealersFirstCard')
+                    firstBottomGem.setAttribute('id','dealersFirstCardBotGem')
+                    cpuPlayingCard.appendChild(firstBottomGem)
+                    break;
+                
+                    
+                case 'clubs':
+                    firstTopGem = document.createElement('i')
+                    firstTopGem.setAttribute('class', 'topGem bi bi-suit-club-fill dealersFirstCard',)
+                    firstTopGem.setAttribute('id', 'firstDealerCardTopG')
+                    cpuPlayingCard.appendChild(firstTopGem)
+                        
+                    firstBottomGem = document.createElement('i')
+                    firstBottomGem.setAttribute('class','bottomGem bi bi-suit-club-fill dealersFirstCard')
+                    firstBottomGem.setAttribute('id','dealersFirstCardBotGem')
+                    cpuPlayingCard.appendChild(firstBottomGem)
+                    break;
+                        
+                
+            }
                 firstTopNum = document.createElement('div')
                 firstTopNum.setAttribute('class', 'cardnumber-top dealersFirstCard')
                 firstTopNum.innerHTML = cpuHand[y].value
@@ -229,14 +352,49 @@ function renderCpuCards(firstCardCpu,newCardCpu){
                 var cpuPlayingCard = document.createElement('div')
                 cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
                 cpuHandDisplay.appendChild(cpuPlayingCard)
-                
+            
+                switch(cpuHand[y].Suit){
+            
+                case 'hearts':
                 var topGem = document.createElement('i')
-                topGem.setAttribute('class', 'topGem fas fa-gem',)
+                topGem.setAttribute('class', 'topGem bi bi-suit-heart-fill',)
                 cpuPlayingCard.appendChild(topGem)
                 
                 var bottomGem = document.createElement('i')
-                bottomGem.setAttribute('class','bottomGem fas fa-gem')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-heart-fill')
                 cpuPlayingCard.appendChild(bottomGem)
+                break;
+
+                case 'spades':
+                    var topGem = document.createElement('i')
+                    topGem.setAttribute('class', 'topGem bi bi-suit-spade-fill',)
+                    cpuPlayingCard.appendChild(topGem)
+                    
+                    var bottomGem = document.createElement('i')
+                    bottomGem.setAttribute('class','bottomGem bi bi-suit-spade-fill')
+                    cpuPlayingCard.appendChild(bottomGem)
+                    break;
+                
+                case 'diamonds':
+                    var topGem = document.createElement('i')
+                    topGem.setAttribute('class', 'topGem  bi bi-suit-diamond-fill',)
+                    cpuPlayingCard.appendChild(topGem)
+                    
+                    var bottomGem = document.createElement('i')
+                    bottomGem.setAttribute('class','bottomGem  bi bi-suit-diamond-fill')
+                    cpuPlayingCard.appendChild(bottomGem)
+                    break;
+                
+                case 'clubs':
+                    var topGem = document.createElement('i')
+                    topGem.setAttribute('class', 'topGem  bi bi-suit-club-fill',)
+                    cpuPlayingCard.appendChild(topGem)
+                    
+                    var bottomGem = document.createElement('i')
+                    bottomGem.setAttribute('class','bottomGem bi bi-suit-club-fill')
+                    cpuPlayingCard.appendChild(bottomGem)
+                    break;
+            }
                 
                 var topNum = document.createElement('div')
                 topNum.setAttribute('class', 'cardnumber-top')
@@ -253,14 +411,48 @@ function renderCpuCards(firstCardCpu,newCardCpu){
         var cpuPlayingCard = document.createElement('div')
         cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
         cpuHandDisplay.appendChild(cpuPlayingCard)
-        
-        var topGem = document.createElement('i')
-        topGem.setAttribute('class', 'topGem fas fa-gem',)
-        cpuPlayingCard.appendChild(topGem)
-        
-        var bottomGem = document.createElement('i')
-        bottomGem.setAttribute('class','bottomGem fas fa-gem')
-        cpuPlayingCard.appendChild(bottomGem)
+    switch(newCardCpu.Suit) {
+            case 'hearts':
+                var topGem = document.createElement('i')
+                topGem.setAttribute('class', 'topGem bi bi-suit-heart-fill',)
+                cpuPlayingCard.appendChild(topGem)
+            
+            var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-heart-fill')
+                cpuPlayingCard.appendChild(bottomGem)
+                break;
+
+            case 'spades':
+                var topGem = document.createElement('i')
+                topGem.setAttribute('class', 'topGem bi bi-suit-spade-fill',)
+                cpuPlayingCard.appendChild(topGem)
+                
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-spade-fill')
+                cpuPlayingCard.appendChild(bottomGem)
+                break;
+            
+            case 'diamonds':
+                var topGem = document.createElement('i')
+                topGem.setAttribute('class', 'topGem  bi bi-suit-diamond-fill',)
+                cpuPlayingCard.appendChild(topGem)
+                
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem  bi bi-suit-diamond-fill')
+                cpuPlayingCard.appendChild(bottomGem)
+                break;
+            
+            case 'clubs':
+                var topGem = document.createElement('i')
+                topGem.setAttribute('class', 'topGem  bi bi-suit-club-fill',)
+                cpuPlayingCard.appendChild(topGem)
+                
+                var bottomGem = document.createElement('i')
+                bottomGem.setAttribute('class','bottomGem bi bi-suit-club-fill')
+                cpuPlayingCard.appendChild(bottomGem)
+                break;
+
+    }
         
         var topNum = document.createElement('div')
         topNum.setAttribute('class', 'cardnumber-top')
@@ -274,7 +466,8 @@ function renderCpuCards(firstCardCpu,newCardCpu){
     }
 }
 function endRound()
-{
+{   console.log(userHand)
+    console.log(cpuHand)
     currentCpuHandValue.innerText = sumForCpu
     currentHandValueDisplay.innerText = sumForUser
     if (sumForUser < sumForCpu && sumForCpu <= 21){
@@ -283,12 +476,12 @@ function endRound()
         gameStatusContainer.style.background = 'red'
         
     }
-    if (sumForUser > sumForCpu && sumForUser > 21) {
+    else if (sumForUser > sumForCpu && sumForUser > 21) {
         gameStatus.innerText = ''
         gameStatus.innerText = 'You lost because your hand value exceeded 21'
         gameStatusContainer.style.background = 'red'
     }
-    if (sumForUser > sumForCpu && sumForUser <= 21){
+    else if (sumForUser > sumForCpu && sumForUser <= 21){
         console.log('Congrats you won!')
         gameStatus.innerText = ''
         gameStatus.innerText = 'Congrats you won!'
@@ -300,7 +493,7 @@ function endRound()
         gameStatusContainer.style.background = 'chartreuse'
     }
     
-    else if (sumForUser === sumForCpu) {
+    else {
         console.log('Congats on the tie')
         gameStatus.innerText = ''
         gameStatus.innerText = 'Its a push since CPU hand value equaled the value of the cards in your hand.'
@@ -396,7 +589,7 @@ function initialHandValues (uH,cH){ ///Calculates the initial values for hands a
             cpuHand.push(deck[randomNumber2])}
             nextHandBtn.style.color ='white'
             nextHandBtn.disabled = true
-            console.log(cpuHand)
+            
             
             initialHandValues(userHand, cpuHand)
         }
