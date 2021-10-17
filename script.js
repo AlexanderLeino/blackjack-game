@@ -141,7 +141,7 @@ function userRequestedCard(){
                 }    
             }
         }
-        
+            
     } 
     if (sumForUser > 21 && userHand.value != "A"){
         endRound()
@@ -154,7 +154,9 @@ function userRequestedCard(){
     renderCards(false,deck[randomNumber])  
 }
 function renderCards (firstCard, newCard){
+    
     if (firstCard){
+        currentCpuHandValue.innerText = sumForCpu-cpuHand[0].weight
         for(var i = 0; i < userHand.length; i++){
             var userPlayingCard = document.createElement('div')
             userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
@@ -314,7 +316,7 @@ function renderCards (firstCard, newCard){
         }
     } 
     currentHandValueDisplay.innerText = sumForUser
-    currentCpuHandValue.innerText = sumForCpu-cpuHand[0].weight
+    
     console.log(cpuHand[0].value)
 }
 function renderCpuCards(firstCardCpu,newCardCpu){
