@@ -156,7 +156,6 @@ function userRequestedCard(){
 function renderCards (firstCard, newCard){
     if (firstCard){
         for(var i = 0; i < userHand.length; i++){
-            console.log(userHand[i].Suit)
             var userPlayingCard = document.createElement('div')
             userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
             playerHandDisplay.appendChild(userPlayingCard)
@@ -218,6 +217,21 @@ function renderCards (firstCard, newCard){
             bottomNum.setAttribute('class', 'cardnumber-bottom')
             bottomNum.innerHTML = userHand[i].value
             userPlayingCard.appendChild(bottomNum)
+            switch(userHand[i].color){
+                case 'black':
+                topNum.classList.add('black')
+                topGem.classList.add('black')
+                bottomNum.classList.add('black')
+                bottomGem.classList.add('black')
+                break;
+                
+                case 'red':
+                topNum.classList.add('red')
+                topGem.classList.add('red')
+                bottomNum.classList.add('red')
+                bottomGem.classList.add('red')
+                break;   
+            }
         }
         
     }
@@ -283,6 +297,21 @@ function renderCards (firstCard, newCard){
         bottomNum.setAttribute('class', 'cardnumber-bottom')
         bottomNum.innerHTML = newCard.value
         userPlayingCard.appendChild(bottomNum)
+        switch(newCard.color){
+            case 'black':
+            topNum.classList.add('black')
+            topGem.classList.add('black')
+            bottomNum.classList.add('black')
+            bottomGem.classList.add('black')
+            break;
+            
+            case 'red':
+            topNum.classList.add('red')
+            topGem.classList.add('red')
+            bottomNum.classList.add('red')
+            bottomGem.classList.add('red')
+            break;   
+        }
     } 
     currentHandValueDisplay.innerText = sumForUser
     currentCpuHandValue.innerText = sumForCpu-cpuHand[0].weight
@@ -365,6 +394,22 @@ function renderCpuCards(firstCardCpu,newCardCpu){
                 firstBottomNum.innerHTML = cpuHand[y].value
                 // bottomNum.style.visibility = 'hidden'
                 cpuPlayingCard.appendChild(firstBottomNum)
+
+                switch(cpuHand[y].color){
+                    case 'black':
+                    firstTopNum.classList.add('black')
+                    firstTopGem.classList.add('black')
+                    firstBottomNum.classList.add('black')
+                    firstBottomGem.classList.add('black')
+                    break;
+                    
+                    case 'red':
+                    firstTopNum.classList.add('red')
+                    firstTopGem.classList.add('red')
+                    firstBottomNum.classList.add('red')
+                    firstBottomGem.classList.add('red')
+                    break;   
+                }
             }
             else {
                 var cpuPlayingCard = document.createElement('div')
@@ -423,55 +468,72 @@ function renderCpuCards(firstCardCpu,newCardCpu){
                 bottomNum.setAttribute('class', 'cardnumber-bottom')
                 bottomNum.innerHTML = cpuHand[y].value
                 cpuPlayingCard.appendChild(bottomNum)
+                switch(cpuHand[y].color){
+                    case 'black':
+                            topNum.classList.add('black')
+                            topGem.classList.add('black')
+                            bottomNum.classList.add('black')
+                            bottomGem.classList.add('black')
+                            break;
+                            
+                            case 'red':
+                            topNum.classList.add('red')
+                            topGem.classList.add('red')
+                            bottomNum.classList.add('red')
+                            bottomGem.classList.add('red')
+                            break;      
+                }
+
             }
         }
     } else {
         var cpuPlayingCard = document.createElement('div')
         cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
         cpuHandDisplay.appendChild(cpuPlayingCard)
-    switch(newCardCpu.Suit) {
-            case 'hearts':
-                var topGem = document.createElement('i')
-                topGem.setAttribute('class', 'topGem bi bi-suit-heart-fill',)
-                cpuPlayingCard.appendChild(topGem)
-            
-            var bottomGem = document.createElement('i')
-                bottomGem.setAttribute('class','bottomGem bi bi-suit-heart-fill')
-                cpuPlayingCard.appendChild(bottomGem)
-                break;
-
-            case 'spades':
-                var topGem = document.createElement('i')
-                topGem.setAttribute('class', 'topGem bi bi-suit-spade-fill',)
-                cpuPlayingCard.appendChild(topGem)
-                
-                var bottomGem = document.createElement('i')
-                bottomGem.setAttribute('class','bottomGem bi bi-suit-spade-fill')
-                cpuPlayingCard.appendChild(bottomGem)
-                break;
-            
-            case 'diamonds':
-                var topGem = document.createElement('i')
-                topGem.setAttribute('class', 'topGem  bi bi-suit-diamond-fill',)
-                cpuPlayingCard.appendChild(topGem)
-                
-                var bottomGem = document.createElement('i')
-                bottomGem.setAttribute('class','bottomGem  bi bi-suit-diamond-fill')
-                cpuPlayingCard.appendChild(bottomGem)
-                break;
-            
-            case 'clubs':
-                var topGem = document.createElement('i')
-                topGem.setAttribute('class', 'topGem  bi bi-suit-club-fill',)
-                cpuPlayingCard.appendChild(topGem)
-                
-                var bottomGem = document.createElement('i')
-                bottomGem.setAttribute('class','bottomGem bi bi-suit-club-fill')
-                cpuPlayingCard.appendChild(bottomGem)
-                break;
-
-    }
         
+        switch(newCardCpu.Suit) {
+                case 'hearts':
+                    var topGem = document.createElement('i')
+                    topGem.setAttribute('class', 'topGem bi bi-suit-heart-fill',)
+                    cpuPlayingCard.appendChild(topGem)
+                
+                var bottomGem = document.createElement('i')
+                    bottomGem.setAttribute('class','bottomGem bi bi-suit-heart-fill')
+                    cpuPlayingCard.appendChild(bottomGem)
+                    break;
+
+                case 'spades':
+                    var topGem = document.createElement('i')
+                    topGem.setAttribute('class', 'topGem bi bi-suit-spade-fill',)
+                    cpuPlayingCard.appendChild(topGem)
+                    
+                    var bottomGem = document.createElement('i')
+                    bottomGem.setAttribute('class','bottomGem bi bi-suit-spade-fill')
+                    cpuPlayingCard.appendChild(bottomGem)
+                    break;
+                
+                case 'diamonds':
+                    var topGem = document.createElement('i')
+                    topGem.setAttribute('class', 'topGem  bi bi-suit-diamond-fill',)
+                    cpuPlayingCard.appendChild(topGem)
+                    
+                    var bottomGem = document.createElement('i')
+                    bottomGem.setAttribute('class','bottomGem  bi bi-suit-diamond-fill')
+                    cpuPlayingCard.appendChild(bottomGem)
+                    break;
+                
+                case 'clubs':
+                    var topGem = document.createElement('i')
+                    topGem.setAttribute('class', 'topGem  bi bi-suit-club-fill',)
+                    cpuPlayingCard.appendChild(topGem)
+                    
+                    var bottomGem = document.createElement('i')
+                    bottomGem.setAttribute('class','bottomGem bi bi-suit-club-fill')
+                    cpuPlayingCard.appendChild(bottomGem)
+                    break;
+
+        }
+
         var topNum = document.createElement('div')
         topNum.setAttribute('class', 'cardnumber-top')
         topNum.innerHTML = newCardCpu.value
@@ -481,6 +543,21 @@ function renderCpuCards(firstCardCpu,newCardCpu){
         bottomNum.setAttribute('class', 'cardnumber-bottom')
         bottomNum.innerHTML = newCardCpu.value
         cpuPlayingCard.appendChild(bottomNum)
+    switch(newCardCpu.color){
+        case 'black':
+                topNum.classList.add('black')
+                topGem.classList.add('black')
+                bottomNum.classList.add('black')
+                bottomGem.classList.add('black')
+                break;
+                
+                case 'red':
+                topNum.classList.add('red')
+                topGem.classList.add('red')
+                bottomNum.classList.add('red')
+                bottomGem.classList.add('red')
+                break;      
+    }
     }
 }
 function endRound()
