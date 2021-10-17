@@ -3,6 +3,7 @@
 //Need to create a function that allows us to check the initiial hand values for cpu and user and if cpu or user has 21 then said player wins
 var suits = ['diamonds', 'spades', 'clubs', 'hearts']
 var cardValues = ['2', '3', '4', '5', '6' , '7' , '8', '9','10' ,'J' ,'Q', 'K', 'A']
+let cardColors = ['Red', 'Black']
 var randomNumber
 var randomNumber2
 var userHand = []
@@ -23,9 +24,6 @@ var hasFourthAce = false
 var endTurnBtn = document.getElementById('stay').addEventListener('click',cpuTurn)
 var nextHandBtn = document.getElementById('nextHandBtn')
 
-var availableChips = 500
-var currentPotValue = 0
-var wagerForNextHand = 25
 
 var playerHandDisplay = document.getElementById('player-hand-display')
 var cpuHandDisplay = document.getElementById('cpu-hand-display')
@@ -43,49 +41,69 @@ let roundHasEnded = true
 
 // Declaring these variables to be able to remove the children form the parent div for each card created 
 
-var data = window.localStorage
+// using local storage for be handling
+
 //Getting Elements on HTML
 var gameStatus = document.getElementById('gameStatus')
 var gameStatusContainer = document.getElementById('gameStatus-Container')
-var betForNextHand = document.getElementById('betForNextHand')
-var userChipValue = document.getElementById('currentChipCount').innerText = availableChips
-betForNextHand.innerText = wagerForNextHand
 
 //Event Listners
 var increaseBet = document.getElementById('increaseBtn')
 var decreaseBet = document.getElementById('decreaseBtn')
-increaseBet.addEventListener('click',betSettler)
-decreaseBet.addEventListener('click', betSettler)
-wagerForNextHand +=25, availableChips -= 25
-wagerForNextHand-=25, availableChips += 25
+increaseBet.addEventListener('click', increaseNextBet)
+decreaseBet.addEventListener('click', decreaseNextBet)
+/// Betting constructors
+let wagerForNextHand = 0
+let potForRound = 0
+let chipCount = 500
+let betForNextHand = document.getElementById('betForNextHand')
+betForNextHand.innerText = wagerForNextHand
+let userChipCount = document.getElementById('currentChipCount')
+userChipCount.innerText = chipCount
+let data = window.localStorage
+data.setItem('userChipCount',chipCount )
+betForNextHand.innerText = wagerForNextHand
 
 let userHandDisplayArray = []
 let cpuHandDisplayArray = []
-// dealerRevealFirstCard(firstTopGem,firstBottomGem,firstTopNum, firstBottomNum, cardBack)
+
 
 function  dealerRevealFirstCard(){
-        cardBack.remove()
-        firstTopGem.style.visibility = 'visible'
-        firstBottomGem.style.visibility = 'visible'
-        firstTopNum.style.visibility = 'visible'
-        firstBottomNum.style.visibility = 'visible'
-        
+    cardBack.remove()
+    firstTopGem.style.visibility = 'visible'
+    firstBottomGem.style.visibility = 'visible'
+    firstTopNum.style.visibility = 'visible'
+    firstBottomNum.style.visibility = 'visible'
+    
+}
+function increaseNextBet() {
+    wagerForNextHand += 25
+    chipCount -= 25
+    data.setItem('userChipCount', chipCount)
+    potForRound += wagerForNextHand
+    betForNextHand.innerText = wagerForNextHand
+    console.log(potForRound)
+    wagerForNextHand = 0
+}
 
-        console.log(firstTopGem)
-        console.log(firstBottomGem)
-        console.log(firstTopNum)
-        console.log(firstBottomNum) 
-}
-function betSettler () {
-}
+function decreaseNextBet (){
+    if (wagerForNextHand <= 0){
+        return
+    }
+    else {
+        wagerForNextHand -= 25
+        chipCount += 25
+        betForNextHand.innerText = wagerForNextHand
+        data.setItem('userChipCount', chipCount)
+        potForRound -= betForNextHand
+        console.log(potForRound)
+    }
+} 
 
 function startGame (){
     gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
     if(sumForUser > 0 && sumForCpu > 0){
         location.reload()
-        
-        
-        
         sumForUser = 0
         sumForCpu = 0
         userHand = []
@@ -466,15 +484,14 @@ function renderCpuCards(firstCardCpu,newCardCpu){
     }
 }
 function endRound()
-{   console.log(userHand)
-    console.log(cpuHand)
-    currentCpuHandValue.innerText = sumForCpu
+{   currentCpuHandValue.innerText = sumForCpu
     currentHandValueDisplay.innerText = sumForUser
     if (sumForUser < sumForCpu && sumForCpu <= 21){
         gameStatus.innerText = ''
         gameStatus.innerText = 'The cpu won!'
         gameStatusContainer.style.background = 'red'
-        
+        chipCount -= 
+        data.setItem('userChipCount', chipCount)
     }
     else if (sumForUser > sumForCpu && sumForUser > 21) {
         gameStatus.innerText = ''
@@ -502,6 +519,7 @@ function endRound()
     }
     nextHandBtn.style.color ='black'
     nextHandBtn.disabled = false
+    console.log(userHand,cpuHand)
     dealerRevealFirstCard()   
 }
 
@@ -579,7 +597,7 @@ function initialHandValues (uH,cH){ ///Calculates the initial values for hands a
         }
     }
     
-    function dealCards() //This function assigns a hand to each player
+function dealCards() //This function assigns a hand to each player
     {
         for(i = 0; i < 2; i++){
             randomNumber = Math.floor(Math.random()* deck.length)
@@ -596,7 +614,7 @@ function initialHandValues (uH,cH){ ///Calculates the initial values for hands a
         
         
         
-        function shuffle(array) {                             
+function shuffle(array) {                             
             var currentIndex = array.length,  randomIndex;
             
             // While there remain elements to shuffle...
@@ -609,12 +627,11 @@ function initialHandValues (uH,cH){ ///Calculates the initial values for hands a
                 // And swap it with the current element.
                 [array[currentIndex], array[randomIndex]] = [
                     array[randomIndex], array[currentIndex]];
-                }
-                
+                }  
             }
-            function getDeck()
+function getDeck()
             {
-                const deck = new Array();
+                let deck = new Array();
                 
                 for(var i = 0; i < suits.length; i++)
                 {
@@ -628,10 +645,28 @@ function initialHandValues (uH,cH){ ///Calculates the initial values for hands a
                             weight = 11;
                             
                         }
-                        var card = {value : cardValues[x], Suit: suits[i], weight: weight, is1: false};
+                        var card = {value : cardValues[x], Suit: suits[i], weight: weight, is1: false,};
                         deck.push(card);
+                        
+                        // for (let c = 0; c < deck.length; c++){
+                        //     if (deck.indexOf(c))
+                        // }
                     }
-                } shuffle(deck)
-                
+
+                }
+                let colorPicker = 'black'
+                deck.map(card => {
+                    if (colorPicker === 'black'){
+                        card.color = 'black'
+                        
+                        colorPicker = 'red'
+                    } else {
+                        card.color = 'red'
+                        colorPicker = 'black'
+                        
+                    }
+                })
+                shuffle(deck)
                 return deck;
             }
+           
