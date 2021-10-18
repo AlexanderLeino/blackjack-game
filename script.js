@@ -156,6 +156,7 @@ function userRequestedCard(){
 function renderCards (firstCard, newCard){
     
     if (firstCard){
+        //Placed the code on line 160 here to avoid errors occurring if user were to win before cpu had a turn when calculating visible cpu handvalue
         currentCpuHandValue.innerText = sumForCpu-cpuHand[0].weight
         for(var i = 0; i < userHand.length; i++){
             var userPlayingCard = document.createElement('div')
