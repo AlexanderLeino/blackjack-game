@@ -17,14 +17,14 @@
       </div>
 
     <div class="container ms-2"></div>
-      <div class="row">
+      <div class="row mt-2">
         <h3>Your Current Hand Value:<span id="currentHandValue"></span></h3>
       <div class="row" id="player-hand-display">
         </div>
       </div>
       </div>
       <div class="row">
-        <div class="container ms-2 mt-2"></div>
+        <div class="container ms-2 mt-3"></div>
         <h3 id="cpuActual">Cpu's Current Viewable Hand Value:<span id="cpuCurrentHandValue"></span></h3>
       <div class="row" id="cpu-hand-display"></div>
       </div>
@@ -51,20 +51,26 @@
             <button class="betControls" id="decreaseBtn"">Decrease Next Bet</button>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12" id="dealHandBtn">
+
+        <div class="row mt-2">
+        <div class="container-fluid d-flex">
+          
+          <div class="col-4">
+            <button class= "hit" onclick="userRequestedCard()">Click Here to Request Another Card</button>
+          </div>
+
+          <div class="col-4">
             <button id="nextHandBtn" onclick="startGame()">Next Hand </button>
           </div>
-        </div>
-        <div class="container-fluid">
-          <button id="placeBetBtn">Place Bet</button>
-          <button id="increaseBetBtn">Increase Bet</button>
-          <button id="decreaseBetBtn">Decrease Bet</button>
-          <button class= "hit" onclick="userRequestedCard()">Click Here to Request Another Card</button>
-          <button id="stay">Stay</button>
-        </div>
+          
+          <div class="col-4">
+            <button id="stay">Stay</button>
+          </div>
 
         </div>
+              
+        </div>
+          
       
 
     <!-- Optional JavaScript; choose one of the two! -->

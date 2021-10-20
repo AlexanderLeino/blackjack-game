@@ -1,3 +1,7 @@
+body {
+    margin-left: 1rem;
+}
+
 .dealersFirstCard {
     visibility: hidden;
 }
@@ -16,7 +20,6 @@ transform: rotate(180deg);
 }
 .cardnumber-top{
     top: -30px;
-    
     position: relative;
     left: -9px;
     font-size: 24px;
@@ -94,4 +97,11 @@ transform: rotate(180deg);
 }
 .red {
     color: red;
+}
+#stay {
+    width: 100%;
+}
+
+.hit {
+    width: 100%;
 }
