@@ -2,42 +2,6 @@ body {
     margin-left: 1rem;
 }
 
-.dealersFirstCard {
-    visibility: hidden;
-}
-
-.topGem {
-position: relative;
-left: -11px;
-top: 21px;
-
-}
-.bottomGem {
-position: relative;
-top: 129px;
-left: 89px;
-transform: rotate(180deg);
-}
-.cardnumber-top{
-    top: -30px;
-    position: relative;
-    left: -9px;
-    font-size: 24px;
-}
-.cardnumber-bottom {
-    position: relative;
-    margin-top: 83px;
-    font-size: 25px;
-    transform: rotate(180deg);
-    left: 10px;
-
-}
-.users-card {
-    height: 175px;
-    background-color: white;
-    border: black 1px solid;
-    width: 135px;
-}
 
 #gameStatus-Container {
     border: 3px black solid;
@@ -92,12 +56,7 @@ transform: rotate(180deg);
     transform: scale(.45);
 }
 
-.black {
-    color: black;
-}
-.red {
-    color: red;
-}
+
 #stay {
     width: 100%;
 }

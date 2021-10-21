@@ -8,7 +8,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="gameBoardStyling.css">
+    <link rel="stylesheet" href="cardStyling.css">
     <title>Alex's Black Jack Game</title>
   </head>
   <body>
@@ -16,60 +17,66 @@
         <H1 id="heading-gameStatus">Game Status:<span id="gameStatus"></span></H1>
       </div>
 
-    <div class="container ms-2"></div>
-      <div class="row mt-2">
-        <h3>Your Current Hand Value:<span id="currentHandValue"></span></h3>
+<div class="container ms-2"></div>
+  <div class="row mt-2">
+    <h3>Your Current Hand Value:<span id="currentHandValue"></span></h3>
       <div class="row" id="player-hand-display">
-        </div>
       </div>
+  </div>
+</div>
+
+  <div class="row">
+<div class="container ms-2 mt-3"></div>
+      <h3 id="cpuActual">Cpu's Current Viewable Hand Value:<span id="cpuCurrentHandValue"></span></h3>
+  <div class="row" id="cpu-hand-display"></div>
+  </div>
+  
+<div class="container mt-4 mb-2" id="scoreContainer">
+  <div class="row">
+    
+    <div class="col-6 chipTrackers">
+      Current Chip Count:
+    </div>
+
+    <div class="col-3">
+      <span id="currentChipCount"></span>
+    </div>
+
+    <div class="col-3">
+      <button class="betControls" id="increaseBtn">Increase Next Bet</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-6 chipTrackers">Bet For Next Hand:</div>
+
+    <div class="col-3">
+      <span id="betForNextHand"></span>
+    </div>
+
+    <div class="col-3">
+      <button class="betControls" id="decreaseBtn">Decrease Next Bet</button>
+    </div>
+
+  </div>
+
+  <div class="row mt-2">
+    <div class="container-fluid d-flex">
+      
+      <div class="col-4">
+        <button class= "hit" onclick="userRequestedCard()">Click Here to Request Another Card</button>
       </div>
-      <div class="row">
-        <div class="container ms-2 mt-3"></div>
-        <h3 id="cpuActual">Cpu's Current Viewable Hand Value:<span id="cpuCurrentHandValue"></span></h3>
-      <div class="row" id="cpu-hand-display"></div>
+
+      <div class="col-4">
+        <button id="nextHandBtn" onclick="startGame()">Next Hand </button>
       </div>
-      <div class="container mt-4 mb-2" id="scoreContainer">
-        <div class="row">
-          <div class="col-6 chipTrackers">
-            Current Chip Count:
-          </div>
-          <div class="col-3">
-            <span id="currentChipCount"></span>
-          </div>
-          <div class="col-3">
-            <button class="betControls" id="increaseBtn">Increase Next Bet</button>
-          </div>
+        
+      <div class="col-4">
+        <button id="stay">Stay</button>
         </div>
-        <div class="row">
-          <div class="col-6 chipTrackers">
-            Bet For Next Hand:
-          </div>
-          <div class="col-3">
-            <span id="betForNextHand"></span>
-          </div>
-          <div class="col-3">
-            <button class="betControls" id="decreaseBtn"">Decrease Next Bet</button>
-          </div>
-        </div>
-
-        <div class="row mt-2">
-        <div class="container-fluid d-flex">
-          
-          <div class="col-4">
-            <button class= "hit" onclick="userRequestedCard()">Click Here to Request Another Card</button>
-          </div>
-
-          <div class="col-4">
-            <button id="nextHandBtn" onclick="startGame()">Next Hand </button>
-          </div>
-          
-          <div class="col-4">
-            <button id="stay">Stay</button>
-          </div>
-
-        </div>
-              
-        </div>
+    </div>       
+  </div>
           
       
 
