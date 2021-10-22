@@ -1,5 +1,6 @@
 .dealersFirstCard {
     visibility: hidden;
+    transform: scale(1.1);
 }
 
 
@@ -8,6 +9,7 @@
     background-color: white;
     border: black 1px solid;
     width: 135px;
+    transform: scale(1.1);
 }
 
 .topGem {
@@ -45,4 +47,7 @@
 
 .red {
     color: red;
+}
+.ms-5 {
+    margin-left: 5rem !important;
 }

@@ -9,8 +9,8 @@ h3 {
 }
 
 .table1 {
-background-color: #321414;
-   padding-top: 10px;
+   background-color: #321414;
+   padding-top: 21px;
    padding-bottom: 10px;
    width: 115rem;
    border-radius: 90px 90px 0 0;
@@ -24,7 +24,7 @@ background-color: #321414;
 .table2 {
    background-color: #321414;
    padding-top: 5px;
-   padding-bottom: 97px;
+   padding-bottom: 65px;
    width: 115rem;
    border-radius: 0 0 90px 90px;
    border-bottom: 5px solid black;
@@ -40,11 +40,13 @@ background-color: #321414;
     
 }
 #cpuActual {
-    text-align: center;
-    color: white;
+    color: black;
     font-weight: bolder;
+    background-color: lightyellow;
+    padding: .75rem;
+    border: black 5px solid;
+    border-radius: 25px;
 }
-
 .currentHandValue {
     color: white;
     font-weight: bolder;
@@ -83,6 +85,7 @@ background-color: #321414;
     color: white;
     font-weight: bolder;
     margin-left: 227px;
+    border: solid black 5px;
 }
 #nextHandBtn {
     width: 100%;  
@@ -132,12 +135,18 @@ background-color: #321414;
     
 }
 .currentHandValueContainer {
-    color: white;
+    color: black;
     font-weight: bolder;
+    background-color: lightyellow;
+    padding: .75rem;
+    border: black 5px solid;
+    border-radius: 25px;
 }
 
 button {
     background-color:  lightyellow;
     border: black solid 1px;
-   
+    font-size: 1.57rem;
+    font-weight: bold;  
 }
+
