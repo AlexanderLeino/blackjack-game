@@ -68,11 +68,13 @@ h3 {
     margin-left: -88px;
     border: 5px solid black;
     border-radius: 25px;
+    color: black;
 }
 #gameStatus {
     margin-left: 10px;
     font-weight: bold;
-    font-size: 30px; 
+    font-size: 30px;
+    color: black; 
 }
 #dealHandBtn {
     text-align: center;

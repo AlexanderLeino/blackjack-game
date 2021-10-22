@@ -101,7 +101,7 @@ function decreaseNextBet (){
     }
 }
 //Sets Game Status immediately  
-gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
+gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand simply press "Next Hand"!'
 
 function startGame (){
     if(sumForUser > 0 && sumForCpu > 0){
@@ -493,7 +493,7 @@ function renderCpuCards(firstCardCpu,newCardCpu){
         }
     } else {
         var cpuPlayingCard = document.createElement('div')
-        cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+        cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-5 users-card")
         cpuHandDisplay.appendChild(cpuPlayingCard)
         
         switch(newCardCpu.Suit) {
