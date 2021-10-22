@@ -46,6 +46,7 @@ let roundHasEnded = true
 //Getting Elements on HTML
 var gameStatus = document.getElementById('gameStatus')
 var gameStatusContainer = document.getElementById('gameStatus-Container')
+let heading_gameStatus = document.getElementById('heading-gameStatus')
 
 //Event Listners
 var increaseBet = document.getElementById('increaseBtn')
@@ -98,10 +99,11 @@ function decreaseNextBet (){
         potForRound -= betForNextHand
         console.log(potForRound)
     }
-} 
+}
+//Sets Game Status immediately  
+gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
 
 function startGame (){
-    gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand you can either press "Place Bet" or "Deal Cards"'
     if(sumForUser > 0 && sumForCpu > 0){
         location.reload()
         sumForUser = 0
@@ -160,7 +162,7 @@ function renderCards (firstCard, newCard){
         currentCpuHandValue.innerText = sumForCpu-cpuHand[0].weight
         for(var i = 0; i < userHand.length; i++){
             var userPlayingCard = document.createElement('div')
-            userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+            userPlayingCard.setAttribute('class',"col-1 m-2 ms-5 users-card")
             playerHandDisplay.appendChild(userPlayingCard)
             
             switch(userHand[i].Suit){
@@ -241,7 +243,7 @@ function renderCards (firstCard, newCard){
     else {
         
         var userPlayingCard = document.createElement('div')
-        userPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+        userPlayingCard.setAttribute('class',"col-1 m-2 ms-5 users-card")
         playerHandDisplay.appendChild(userPlayingCard)
         
         switch(newCard.Suit){
@@ -325,7 +327,7 @@ function renderCpuCards(firstCardCpu,newCardCpu){
         for(var y = 0; y < cpuHand.length; y++){
             if(y === 0){
                 var cpuPlayingCard = document.createElement('div')
-                cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+                cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-5 users-card")
                 cpuHandDisplay.appendChild(cpuPlayingCard)
                 
                 cardBack = document.createElement('img')
@@ -416,7 +418,7 @@ function renderCpuCards(firstCardCpu,newCardCpu){
             }
             else {
                 var cpuPlayingCard = document.createElement('div')
-                cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-3 users-card")
+                cpuPlayingCard.setAttribute('class',"col-1 m-2 ms-5 users-card")
                 cpuHandDisplay.appendChild(cpuPlayingCard)
             
                 switch(cpuHand[y].Suit){
@@ -569,32 +571,32 @@ function endRound()
     if (sumForUser < sumForCpu && sumForCpu <= 21){
         gameStatus.innerText = ''
         gameStatus.innerText = 'The cpu won!'
-        gameStatusContainer.style.background = 'red'
+        heading_gameStatus.style.background = 'red'
         chipCount -= 
         data.setItem('userChipCount', chipCount)
     }
     else if (sumForUser > sumForCpu && sumForUser > 21) {
         gameStatus.innerText = ''
         gameStatus.innerText = 'You lost because your hand value exceeded 21'
-        gameStatusContainer.style.background = 'red'
+        heading_gameStatus.style.background = 'red'
     }
     else if (sumForUser > sumForCpu && sumForUser <= 21){
         console.log('Congrats you won!')
         gameStatus.innerText = ''
         gameStatus.innerText = 'Congrats you won!'
-        gameStatusContainer.style.background = 'chartreuse'   
+        heading_gameStatus.style.background = 'chartreuse'   
     }
     else if (sumForUser < sumForCpu && sumForCpu > 21){
         gameStatus.innerText = ''
         gameStatus.innerText = 'You Won because the CPU hand value exceeded 21'
-        gameStatusContainer.style.background = 'chartreuse'
+        heading_gameStatus.style.background = 'chartreuse'
     }
     
     else {
         console.log('Congats on the tie')
         gameStatus.innerText = ''
         gameStatus.innerText = 'Its a push since CPU hand value equaled the value of the cards in your hand.'
-        gameStatusContainer.style.background = 'yellow'
+        heading_gameStatus.style.background = 'yellow'
         
     }
     nextHandBtn.style.color ='black'
