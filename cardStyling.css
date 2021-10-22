@@ -7,7 +7,7 @@
 .users-card {
     height: 175px;
     background-color: white;
-    border: black 1px solid;
+    border: black 2px solid;
     width: 135px;
     transform: scale(1.1);
 }
