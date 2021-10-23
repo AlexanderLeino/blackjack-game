@@ -488,29 +488,29 @@ function renderCpuCards(firstCardCpu,newCardCpu){
                     break;
                     
                 }
-                switch (cpuHand[y].value){
-                    case 'J':
-                        var facePlate = document.createElement('img')
-                        facePlate.setAttribute('src', './cardAssets/JackSmall.png')
-                        facePlate.setAttribute('class', 'faceCards')
-                        cpuPlayingCard.append(facePlate)
+                // switch (cpuHand[y].value){
+                //     case 'J':
+                //         var facePlate = document.createElement('img')
+                //         facePlate.setAttribute('src', './cardAssets/JackSmall.png')
+                //         facePlate.setAttribute('class', 'faceCards')
+                //         cpuPlayingCard.append(facePlate)
                         
-                        break;
+                //         break;
                     
-                    case 'Q':
-                        var facePlate = document.createElement('img')
-                        facePlate.setAttribute('src', './cardAssets/Queen Small.png')
-                        facePlate.setAttribute('class', 'faceCards')
-                        cpuPlayingCard.append(facePlate)    
-                        break;
+                //     case 'Q':
+                //         var facePlate = document.createElement('img')
+                //         facePlate.setAttribute('src', './cardAssets/Queen Small.png')
+                //         facePlate.setAttribute('class', 'faceCards')
+                //         cpuPlayingCard.append(facePlate)    
+                //         break;
     
-                    case 'K':
-                        var facePlate = document.createElement('img')
-                        facePlate.setAttribute('src', './cardAssets/KingSmall.png')
-                        facePlate.setAttribute('class', 'faceCards')
-                       cpuPlayingCard.append(facePlate)
+                //     case 'K':
+                //         var facePlate = document.createElement('img')
+                //         facePlate.setAttribute('src', './cardAssets/KingSmall.png')
+                //         facePlate.setAttribute('class', 'faceCards')
+                //        cpuPlayingCard.append(facePlate)
         
-                    }
+                //     }
             }
             else {
                 var cpuPlayingCard = document.createElement('div')
