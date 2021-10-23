@@ -3,7 +3,19 @@
     transform: scale(1.1);
 }
 
-
+.firstCardCpu {
+    
+    position: relative;
+    top: -162px;
+    left: -197px;
+    transform: scale(.45);
+}
+.faceCards {
+    position: absolute;
+    top: -165px;
+    left: -189px;
+    transform: scale(.8);
+}
 .users-card {
     height: 175px;
     background-color: white;

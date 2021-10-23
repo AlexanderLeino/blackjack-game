@@ -165,8 +165,33 @@ function renderCards (firstCard, newCard){
             userPlayingCard.setAttribute('class',"col-1 m-2 ms-5 users-card")
             playerHandDisplay.appendChild(userPlayingCard)
             
+            console.log(userHand[i].value)
+            switch (userHand[i].value){
+                case 'J':
+                    var facePlate = document.createElement('img')
+                    facePlate.setAttribute('src', './cardAssets/JackSmall.png')
+                    facePlate.setAttribute('class', 'faceCards')
+                    userPlayingCard.append(facePlate)
+                    
+                    break;
+                
+                case 'Q':
+                    var facePlate = document.createElement('img')
+                    facePlate.setAttribute('src', './cardAssets/Queen Small.png')
+                    facePlate.setAttribute('class', 'faceCards')
+                    userPlayingCard.append(facePlate)    
+                    break;
+
+                case 'K':
+                    var facePlate = document.createElement('img')
+                    facePlate.setAttribute('src', './cardAssets/KingSmall.png')
+                    facePlate.setAttribute('class', 'faceCards')
+                    userPlayingCard.append(facePlate)
+    
+                }
+            
+            
             switch(userHand[i].Suit){
-           
             case 'diamonds':
                 var topGem = document.createElement('i')
                 // Create a switch statement
@@ -245,7 +270,29 @@ function renderCards (firstCard, newCard){
         var userPlayingCard = document.createElement('div')
         userPlayingCard.setAttribute('class',"col-1 m-2 ms-5 users-card")
         playerHandDisplay.appendChild(userPlayingCard)
-        
+        switch (newCard.value){
+            case 'J':
+                var facePlate = document.createElement('img')
+                facePlate.setAttribute('src', './cardAssets/JackSmall.png')
+                facePlate.setAttribute('class', 'faceCards')
+                userPlayingCard.append(facePlate)
+                
+                break;
+            
+            case 'Q':
+                var facePlate = document.createElement('img')
+                facePlate.setAttribute('src', './cardAssets/Queen Small.png')
+                facePlate.setAttribute('class', 'faceCards')
+                userPlayingCard.append(facePlate)    
+                break;
+
+            case 'K':
+                var facePlate = document.createElement('img')
+                facePlate.setAttribute('src', './cardAssets/KingSmall.png')
+                facePlate.setAttribute('class', 'faceCards')
+                userPlayingCard.append(facePlate)
+
+            }
         switch(newCard.Suit){
            
             case 'diamonds':
@@ -320,7 +367,6 @@ function renderCards (firstCard, newCard){
     } 
     currentHandValueDisplay.innerText = sumForUser
     
-    console.log(cpuHand[0].value)
 }
 function renderCpuCards(firstCardCpu,newCardCpu){
     if (firstCardCpu){
@@ -334,6 +380,32 @@ function renderCpuCards(firstCardCpu,newCardCpu){
                 cardBack.setAttribute('src','./Bicycle Cards.png')
                 cardBack.setAttribute('class','firstCardCpu')
                 cpuPlayingCard.appendChild(cardBack)
+                // switch (cpuHand[y].value){
+                //     case 'J':
+                //         var cpuFirstFacePlate = document.createElement('img')
+                //         cpuFirstFacePlate.setAttribute('src', './cardAssets/JackSmall.png')
+                //         cpuFirstFacePlate.setAttribute('class', 'faceCards')
+                //         cpuFirstFacePlate.append(cpuFirstFacePlate)
+                //         cpuFirstFacePlate.style.visibility = 'hidden'
+                        
+                //         break;
+                    
+                //     case 'Q':
+                //         var cpuFirstFacePlate = document.createElement('img')
+                //         cpuFirstFacePlate.setAttribute('src', './cardAssets/Queen Small.png')
+                //         cpuFirstFacePlate.setAttribute('class', 'faceCards')
+                //         cpuPlayingCard.append(cpuFirstFacePlate)
+                //         cpuFirstFacePlate.style.visibility = 'hidden'    
+                //         break;
+    
+                //     case 'K':
+                //         var cpuFirstFacePlate = document.createElement('img')
+                //         cpuFirstFacePlate.setAttribute('src', './cardAssets/KingSmall.png')
+                //         cpuFirstFacePlate.setAttribute('class', 'faceCards')
+                //        cpuPlayingCard.append(facePlate)
+                //        cpuFirstFacePlate.style.visibility = 'hidden'
+        
+                //     }
             switch(cpuHand[y].Suit){
             
                 case 'diamonds':
@@ -413,8 +485,32 @@ function renderCpuCards(firstCardCpu,newCardCpu){
                     firstTopGem.classList.add('red')
                     firstBottomNum.classList.add('red')
                     firstBottomGem.classList.add('red')
-                    break;   
+                    break;
+                    
                 }
+                switch (cpuHand[y].value){
+                    case 'J':
+                        var facePlate = document.createElement('img')
+                        facePlate.setAttribute('src', './cardAssets/JackSmall.png')
+                        facePlate.setAttribute('class', 'faceCards')
+                        cpuPlayingCard.append(facePlate)
+                        
+                        break;
+                    
+                    case 'Q':
+                        var facePlate = document.createElement('img')
+                        facePlate.setAttribute('src', './cardAssets/Queen Small.png')
+                        facePlate.setAttribute('class', 'faceCards')
+                        cpuPlayingCard.append(facePlate)    
+                        break;
+    
+                    case 'K':
+                        var facePlate = document.createElement('img')
+                        facePlate.setAttribute('src', './cardAssets/KingSmall.png')
+                        facePlate.setAttribute('class', 'faceCards')
+                       cpuPlayingCard.append(facePlate)
+        
+                    }
             }
             else {
                 var cpuPlayingCard = document.createElement('div')
