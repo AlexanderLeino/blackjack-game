@@ -1,7 +1,6 @@
 body {
     background-color: #332D27;
-    margin-left: 2rem;
-   
+    margin-left: 2rem;   
 }
 
 h3 {
@@ -130,7 +129,7 @@ h3 {
     height: 4rem;
     
 }
-.currentHandValueContainer {
+#currentHandValueContainer {
     color: black;
     font-weight: bolder;
     background-color: lightyellow;

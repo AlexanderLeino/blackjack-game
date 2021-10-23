@@ -23,12 +23,18 @@ var hasFourthAce = false
 //Variables for html buttons
 var endTurnBtn = document.getElementById('stay').addEventListener('click',cpuTurn)
 var nextHandBtn = document.getElementById('nextHandBtn')
-
+let nextCardBtn = document.getElementById('nextCardBtn')
+nextCardBtn.disabled = true
 
 var playerHandDisplay = document.getElementById('player-hand-display')
 var cpuHandDisplay = document.getElementById('cpu-hand-display')
 let currentHandValueDisplay = document.getElementById('currentHandValue')
 let currentCpuHandValue = document.getElementById('cpuCurrentHandValue')
+
+// These selections are for the two containers that contain the cpus and the users current hand values. 
+let userActualHandValueContainer = document.getElementById('currentHandValueContainer')
+let cpuActual = document.getElementById('cpuActual')
+
 //Needed to delcare cpu's face down card in global scope to be able to manipulate when endRound() is called
 let firstTopGem
 let firstBottomGem
@@ -661,13 +667,15 @@ function renderCpuCards(firstCardCpu,newCardCpu){
     }
     }
 }
-function endRound()
-{   currentCpuHandValue.innerText = sumForCpu
+function endRound(){
+    nextCardBtn.disabled = true
+    currentCpuHandValue.innerText = sumForCpu
     currentHandValueDisplay.innerText = sumForUser
     if (sumForUser < sumForCpu && sumForCpu <= 21){
         gameStatus.innerText = ''
         gameStatus.innerText = 'The cpu won!'
         heading_gameStatus.style.background = 'red'
+        cpuActual.style.background = 'red'
         chipCount -= 
         data.setItem('userChipCount', chipCount)
     }
@@ -675,17 +683,21 @@ function endRound()
         gameStatus.innerText = ''
         gameStatus.innerText = 'You lost because your hand value exceeded 21'
         heading_gameStatus.style.background = 'red'
+        cpuActual.style.background = 'red'
     }
     else if (sumForUser > sumForCpu && sumForUser <= 21){
         console.log('Congrats you won!')
         gameStatus.innerText = ''
         gameStatus.innerText = 'Congrats you won!'
-        heading_gameStatus.style.background = 'chartreuse'   
+        heading_gameStatus.style.background = 'chartreuse'
+        userActualHandValueContainer.style.background = 'chartreuse'
+        
     }
     else if (sumForUser < sumForCpu && sumForCpu > 21){
         gameStatus.innerText = ''
         gameStatus.innerText = 'You Won because the CPU hand value exceeded 21'
         heading_gameStatus.style.background = 'chartreuse'
+        userActualHandValueContainer.style.background = 'chartreuse'
     }
     
     else {
@@ -693,11 +705,11 @@ function endRound()
         gameStatus.innerText = ''
         gameStatus.innerText = 'Its a push since CPU hand value equaled the value of the cards in your hand.'
         heading_gameStatus.style.background = 'yellow'
+        userActualHandValueContainer.style.background = 'yellow'
+        cpuActual.style.background = 'yellow'
         
     }
-    nextHandBtn.style.color ='black'
     nextHandBtn.disabled = false
-    console.log(userHand,cpuHand)
     dealerRevealFirstCard()   
 }
 
@@ -776,14 +788,13 @@ function initialHandValues (uH,cH){ ///Calculates the initial values for hands a
     }
     
 function dealCards() //This function assigns a hand to each player
-    {
+    {   nextCardBtn.disabled = false
         for(i = 0; i < 2; i++){
             randomNumber = Math.floor(Math.random()* deck.length)
             randomNumber2 = Math.floor(Math.random()* deck.length)
             
             userHand.push(deck[randomNumber])
             cpuHand.push(deck[randomNumber2])}
-            nextHandBtn.style.color ='white'
             nextHandBtn.disabled = true
             
             

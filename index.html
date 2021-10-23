@@ -33,8 +33,8 @@
       <H1 id="heading-gameStatus">Game Status:<span id="gameStatus"></span></H1>
     </div>
     <div class="container d-flex justify-content-evenly">
-      <h3 class="currentHandValueContainer">Your Current Hand Value:<span id="currentHandValue"></span></h3>
-      <h3 id="cpuActual">CPU's Current Viewable Hand Value:<span id="cpuCurrentHandValue"></span></h3>
+      <h3 id="currentHandValueContainer">Your Current Hand Value:<span id="currentHandValue"></span></h3>
+      <h3 id="cpuActual">Opponents Current Viewable Hand Value:<span id="cpuCurrentHandValue"></span></h3>
     </div>
   </div>
   <div class="table2">
@@ -78,7 +78,7 @@
     <div class="row mt-2">
       <div class="container-fluid d-flex">
         <div class="col-4">
-          <button class= "hit" onclick="userRequestedCard()">Click Here to Request Another Card</button>
+          <button class= "hit" id="nextCardBtn" onclick="userRequestedCard()">Click Here to Request Another Card</button>
         </div>
         <div class="col-4">
           <button id="nextHandBtn" onclick="startGame()">Next Hand </button>
