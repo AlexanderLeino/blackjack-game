@@ -87,9 +87,10 @@ function onPageLoad(){
        
         
     } else {
-
-        userChips = userChips + 500
+        
+        userChips = 500
         localStorage.setItem('chipCount', userChips)
+        chipCountEL.innerText = userChips
         
     }
 
@@ -708,20 +709,26 @@ function renderCpuCards(firstCardCpu,newCardCpu){
     }
 }
 function endRound(){
+    let userChips = localStorage.getItem('chipCount')
+    userChips = parseInt(userChips)
     nextCardBtn.disabled = true
     currentCpuHandValue.innerText = sumForCpu
     currentHandValueDisplay.innerText = sumForUser
+    setTimeout(forcePageReload, 2000)
+   
     if (sumForUser < sumForCpu && sumForCpu <= 21){
         gameStatus.innerText = ''
         gameStatus.innerText = 'The cpu won!'
         heading_gameStatus.style.background = 'red'
         cpuActual.style.background = 'red'
+        
     }
     else if (sumForUser > sumForCpu && sumForUser > 21) {
         gameStatus.innerText = ''
         gameStatus.innerText = 'You lost because your hand value exceeded 21'
         heading_gameStatus.style.background = 'red'
         cpuActual.style.background = 'red'
+        
     }
     else if (sumForUser > sumForCpu && sumForUser <= 21){
         console.log('Congrats you won!')
@@ -729,6 +736,9 @@ function endRound(){
         gameStatus.innerText = 'Congrats you won!'
         heading_gameStatus.style.background = 'chartreuse'
         userActualHandValueContainer.style.background = 'chartreuse'
+        userChips = userChips + (currentBet *  2)
+        localStorage.setItem('chipCount', userChips)
+        
         
     }
     else if (sumForUser < sumForCpu && sumForCpu > 21){
@@ -736,6 +746,9 @@ function endRound(){
         gameStatus.innerText = 'You Won because the CPU hand value exceeded 21'
         heading_gameStatus.style.background = 'chartreuse'
         userActualHandValueContainer.style.background = 'chartreuse'
+        userChips = userChips + (currentBet *  2)
+        localStorage.setItem('chipCount', userChips)
+        
     }
     
     else {
@@ -745,6 +758,8 @@ function endRound(){
         heading_gameStatus.style.background = 'yellow'
         userActualHandValueContainer.style.background = 'yellow'
         cpuActual.style.background = 'yellow'
+        userChips = currentBet + userChips
+        localStorage.setItem('chipCount', userChips)
         
     }
     nextHandBtn.disabled = false
@@ -752,6 +767,10 @@ function endRound(){
     gameInProgress = false
     increaseBetBtn.disabled = false
     decreaseBetBtn.disabled = false
+}
+
+function forcePageReload() {
+    window.location.reload()
 }
 
 function cpuTurn() {
