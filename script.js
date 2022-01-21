@@ -42,10 +42,8 @@ let firstTopNum
 let firstBottomNum
 let cardBack
 
-
+let gameInProgress = false
 let roundHasEnded = true
-
-// Declaring these variables to be able to remove the children form the parent div for each card created 
 
 // using local storage for be handling
 
@@ -53,27 +51,92 @@ let roundHasEnded = true
 var gameStatus = document.getElementById('gameStatus')
 var gameStatusContainer = document.getElementById('gameStatus-Container')
 let heading_gameStatus = document.getElementById('heading-gameStatus')
+//Sets Game Status immediately  
+gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand simply press "Next Hand"!'
 
-//Event Listners
-var increaseBet = document.getElementById('increaseBtn')
-var decreaseBet = document.getElementById('decreaseBtn')
-increaseBet.addEventListener('click', increaseNextBet)
-decreaseBet.addEventListener('click', decreaseNextBet)
+var increaseBetBtn = document.getElementById('increaseBtn')
+var decreaseBetBtn = document.getElementById('decreaseBtn')
+increaseBetBtn.addEventListener('click', increaseBet)
+decreaseBetBtn.addEventListener('click', decreaseBet)
+
 /// Betting constructors
-let wagerForNextHand = 0
-let potForRound = 0
-let chipCount = 500
-let betForNextHand = document.getElementById('betForNextHand')
-betForNextHand.innerText = wagerForNextHand
-let userChipCount = document.getElementById('currentChipCount')
-userChipCount.innerText = chipCount
-let data = window.localStorage
-data.setItem('userChipCount',chipCount )
-betForNextHand.innerText = wagerForNextHand
+let currentBet = 0
+
+let currentBetEL = document.getElementById('betForNextHand')
+let chipCountEL = document.getElementById('currentChipCount')
+
+currentBetEL.innerText = currentBet
+
+let localStorage = window.localStorage
+// data.setItem('userChipCount',chipCount )
+
 
 let userHandDisplayArray = []
 let cpuHandDisplayArray = []
 
+//On Page Load I want to check localStorage. 
+function onPageLoad(){
+    
+    let userChips = localStorage.getItem('chipCount')
+    
+    //This will check to see if the user has an item in local storage with the key 'userChipCount'
+    if(userChips && userChips > 0){
+
+        userChips = parseInt(userChips)
+        chipCountEL.innerText = userChips
+       
+        
+    } else {
+
+        userChips = userChips + 500
+        localStorage.setItem('chipCount', userChips)
+        
+    }
+
+}
+
+function increaseBet(){
+    let userChips = localStorage.getItem('chipCount')
+
+    if(userChips && userChips > 0 && gameInProgress === false){
+        console.log('Hey at least we are increasing the bet')
+        userChips = parseInt(userChips)
+        userChips -= 50
+        chipCountEL.innerText = userChips
+        currentBet += 50
+        currentBetEL.innerText = currentBet
+        localStorage.setItem('chipCount', userChips)
+
+
+        chipCountEL.innerText = userChips
+        
+    } else {
+        //This just prevents the button from increasing the count if the user has 0 chips left
+            return
+    }
+}
+
+function decreaseBet(){
+    let userChips = localStorage.getItem('chipCount')
+    console.log(userChips)
+
+    if(currentBet >= 50 && gameInProgress === false){
+        console.log('Hey at least we are increasing the bet')
+        userChips = parseInt(userChips)
+        userChips += 50
+        chipCountEL.innerText = userChips
+        currentBet -= 50
+        currentBetEL.innerText = currentBet
+        localStorage.setItem('chipCount', userChips)
+
+
+        chipCountEL.innerText = userChips
+        
+    } else {
+        //This just prevents the button from increasing the count if the user has 0 chips left
+            return
+    }
+}
 
 function  dealerRevealFirstCard(){
     cardBack.remove()
@@ -83,31 +146,8 @@ function  dealerRevealFirstCard(){
     firstBottomNum.style.visibility = 'visible'
     
 }
-function increaseNextBet() {
-    wagerForNextHand += 25
-    chipCount -= 25
-    data.setItem('userChipCount', chipCount)
-    potForRound += wagerForNextHand
-    betForNextHand.innerText = wagerForNextHand
-    console.log(potForRound)
-    wagerForNextHand = 0
-}
 
-function decreaseNextBet (){
-    if (wagerForNextHand <= 0){
-        return
-    }
-    else {
-        wagerForNextHand -= 25
-        chipCount += 25
-        betForNextHand.innerText = wagerForNextHand
-        data.setItem('userChipCount', chipCount)
-        potForRound -= betForNextHand
-        console.log(potForRound)
-    }
-}
-//Sets Game Status immediately  
-gameStatus.innerText = 'Increase or decrease your bet for next hand and to play the next hand simply press "Next Hand"!'
+
 
 function startGame (){
     if(sumForUser > 0 && sumForCpu > 0){
@@ -676,8 +716,6 @@ function endRound(){
         gameStatus.innerText = 'The cpu won!'
         heading_gameStatus.style.background = 'red'
         cpuActual.style.background = 'red'
-        chipCount -= 
-        data.setItem('userChipCount', chipCount)
     }
     else if (sumForUser > sumForCpu && sumForUser > 21) {
         gameStatus.innerText = ''
@@ -710,7 +748,10 @@ function endRound(){
         
     }
     nextHandBtn.disabled = false
-    dealerRevealFirstCard()   
+    dealerRevealFirstCard()
+    gameInProgress = false
+    increaseBetBtn.disabled = false
+    decreaseBetBtn.disabled = false
 }
 
 function cpuTurn() {
@@ -789,6 +830,9 @@ function initialHandValues (uH,cH){ ///Calculates the initial values for hands a
     
 function dealCards() //This function assigns a hand to each player
     {   nextCardBtn.disabled = false
+        gameInProgress = true
+        increaseBetBtn.disabled = true
+        decreaseBetBtn.disabled = true
         for(i = 0; i < 2; i++){
             randomNumber = Math.floor(Math.random()* deck.length)
             randomNumber2 = Math.floor(Math.random()* deck.length)
@@ -858,4 +902,6 @@ function getDeck()
                 shuffle(deck)
                 return deck;
             }
-           
+
+
+onPageLoad()
