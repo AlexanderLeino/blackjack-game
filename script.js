@@ -714,7 +714,7 @@ function endRound(){
     nextCardBtn.disabled = true
     currentCpuHandValue.innerText = sumForCpu
     currentHandValueDisplay.innerText = sumForUser
-    setTimeout(forcePageReload, 2000)
+    setTimeout(forcePageReload, 1500)
    
     if (sumForUser < sumForCpu && sumForCpu <= 21){
         gameStatus.innerText = ''
