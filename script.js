@@ -159,6 +159,8 @@ function startGame (){
         cpuHand = []
         userValuesArray = []
         cpuValuesArray = []
+        increaseBetBtn.disabled = false
+        decreaseBetBtn.disabled = false
         
         dealCards()
         
@@ -208,6 +210,7 @@ function renderCards (firstCard, newCard){
         //Placed the code on line 160 here to avoid errors occurring if user were to win before cpu had a turn when calculating visible cpu handvalue
         currentCpuHandValue.innerText = sumForCpu-cpuHand[0].weight
         for(var i = 0; i < userHand.length; i++){
+            
             var userPlayingCard = document.createElement('div')
             userPlayingCard.setAttribute('class',"col-1 m-2 ms-5 users-card")
             playerHandDisplay.appendChild(userPlayingCard)
@@ -765,8 +768,7 @@ function endRound(){
     nextHandBtn.disabled = false
     dealerRevealFirstCard()
     gameInProgress = false
-    increaseBetBtn.disabled = false
-    decreaseBetBtn.disabled = false
+    
 }
 
 function forcePageReload() {
